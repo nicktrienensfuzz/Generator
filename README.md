@@ -1,2 +1,1 @@
-# Genrerator
 json to swift
