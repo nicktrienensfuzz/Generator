@@ -39,22 +39,17 @@
         <form class="form ajaxForm" action="/" method="get">
             <div class="row">
                 <div class="form-group">
-                    <label for="fname">Class Name</label><br>
+                    <label for="fname">Class Name</label> <span>( + ViewController, + ViewModel)<br>
                     <input name="fname" rows="5" cols="50" class="fname" id="fname" value="Permissions">
                 </div>
             </div>
 
-            <div class="row">
-                <div class="form-group">
-                    <label for="fname">Package Suffix</label><br>
-                    <input name="pname" rows="5" cols="50" class="pname" id="pname" value="Permissions">
-                </div>
-            </div><!--
-             <div class="form-group hide hidden">
-                <label for="scrolls">ScrollView?</label><br>
+         
+            <div class="form-group hide hidden">
+                <label for="scrolls">ScrollView?</label>
                 <input type="checkbox" name="scrolls" rows="5" cols="50" class="scrolls" id="hasVerticalScroll" value="1" >
             </div>
--->
+
 
             <div class="row">
                 <div class="col col-lg-8 form-group">
@@ -63,16 +58,19 @@
                     <div>
                         allowed Types: <span class="badge badge-secondary">TextField</span> <span class="badge badge-secondary">Label</span> <span class="badge badge-secondary">RxLabel</span> <span class="badge badge-secondary">Button</span> <span class="badge badge-secondary">ImageView</span> <!--                    <span class="badge badge-secondary">RxImageView</span> -->
                     </div><br>
-                    <textarea rows="15" cols="90" name="fdata" id="fdata" class="fdata form-control">
+                    <textarea rows="15" cols="50" name="fdata" id="fdata" class="fdata form-control">
 {
 "views":[
-    {"name":"firstName", "type":"RxLabel", "text":""},
-    {"name":"email", "type":"TextField"}
+    {"name":"firstName", "type":"RxLabel", "text":"welcome"},
+    {"name":"email", "type":"TextField", "text":"enter your name"},
+     {"name":"logoImage", "type":"ImageView"}
+    
 ]
 }
-</textarea>
+					</textarea>
                 </div>
             </div>
+
 
             <div class="row">
                 <input class="btn btn-primary sendForm" type="submit" value="Submit" autocomplete="off"> &nbsp;&nbsp;&nbsp; <input class="btn btn-primary downloadFilesSwift" type="submit" value="Download Swift" autocomplete="off">&nbsp;
@@ -87,11 +85,17 @@
         <div class="row">
             <div class="col col-lg-6">
                 <pre class="responseLocalized alert alert-secondary">
- Submit for Localized Strings 
-</pre>
+					Submit for Localized Strings 
+				</pre>
             </div>
-
-            <div class="col col-lg-6 responseLocalizedTable alert alert-secondary"></div>
+        </div>
+             
+		<div class="row">
+			 <div class="col col-lg-6">
+	            <pre class="responseLocalizedTable alert alert-secondary">
+	            	 Submit for Localized Strings 
+	    		</pre>
+            </div>
         </div>
 
         <div class="row">
@@ -100,7 +104,7 @@
 
         <div class="row">
             <div class="col col-lg-6">
-                Swift ViewModel
+                Swift Code
                 <pre class="responseSwiftVM alert alert-secondary">
  Submit for class 
 </pre>
@@ -144,13 +148,11 @@
         }
         
         function createClass(jsonData) {
-
-            var KotlinPackageName = jsonData.package
+			console.log(jsonData);
+			
+            
             var ClassName = jsonData.name
             var VCClassName = jsonData.name + "ViewController"
-            var KotlinVCClassName = jsonData.name + "Fragment"
-            var KotlinBinderClassName = "Fragment" + jsonData.name + "Binding"
-
             var VMClassName = jsonData.name + "ViewModel"
             var dictionary = jsonData.data
 
@@ -158,17 +160,13 @@
             var responseLocalizedTable = ""
             var fields  = ""
             var views = ""
-            var kotlinViews = ""
             var binds = ""
-            var kotlinBinds = ""
             var swiftBinds = ""
             var adds = ""
             var localizes = ""
             var constrain = ""
             var viewModelProperties = ""
             var viewModelMethods = ""
-            var kotlinViewModelMethods = ""
-            var kotlinViewModelProperties = ""
             var lastViewName = ""
             var myDate = new Date()
             var date = (myDate.getMonth() + 1) + "/" + myDate.getDate() + "/" + myDate.getFullYear()
@@ -187,15 +185,9 @@
                 var viewName = ""
                 if (ele.type == "Label" ) {
                     
-
-    /*                  var prop = `let `+ safeName +` = BehaviorSubject<String>(value: "")\n`;
-                    viewModelProperties += prop
-                    kotlinViewModelProperties +=  prop
-    */
                     viewName = safeName +"Label"
                     adds += "\tcontentView.addSubview(" + viewName + ")\n"
-                    views += "\tlet "+ safeName +"Label = Label()\n"
-                    kotlinViews += "\tlet "+ safeName +"Label = Label()\n"
+                    views += "let "+ safeName +"Label = Label()\n"
                     
                     let localizedName = jsLcfirst(jsonData.name) + jsUcfirst(viewName) +"Text"
                     localizes += "\t"+viewName+".text = localized(."+localizedName+")\n"
@@ -206,29 +198,20 @@
                     
                     var prop = `let `+ safeName +` = BehaviorSubject<String>(value: "")\n`;
                     viewModelProperties += prop
-                    kotlinViewModelProperties +=  `var `+ safeName +` = BehaviorSubject.createDefault<String>( "")\n`;
                     
                     viewName = safeName +"Label"
                     //viewName = safeName +"Label"
                     adds += "\tcontentView.addSubview(" + viewName + ")\n"
                     views += "\tlet "+ safeName +"Label = Label()\n"
             
-                    swiftBinds += `\tviewModel.`+safeName+`.asObservable()
-            .bind(to: `+viewName +`.rx.text )
-            .disposed(by: disposeBag)\n`
+                    swiftBinds += `\tviewModel.`+safeName+`
+      .bind(to: `+viewName +`.rx.text )
+      .disposed(by: disposeBag)\n`
             
-                    kotlinBinds += `\tdisposeBag.add(
-    viewModel.`+safeName+`.subscribe(
-            {
-                binding.`+safeName+`.text = it;
-            }
-    )
-    )`
-        
+                           
                 } else if (ele.type == "Button" ) {
                                     
                     viewModelMethods +=  `\tfunc `+ safeName +`Clicked() {  }\n\n`
-                    kotlinViewModelMethods +=  `\tfun `+ safeName +`Clicked() {  }\n\n`
 
                     viewName = safeName +"Button"
                     views += "\tlet "+ viewName +" = "+ ele.type+"()\n"
@@ -250,7 +233,6 @@
                     
                     var prop = `\tlet `+ safeName +` = BehaviorSubject<String>(value: "")\n`;
                     viewModelProperties += prop
-                    kotlinViewModelProperties +=  `var `+ safeName +` = BehaviorSubject.createDefault<String>( "")\n`;
 
                     viewName = safeName +"Field"
                     views += "\tlet "+ viewName +" = "+ ele.type+"()\n"
@@ -276,17 +258,17 @@
                 }
                 
             if ( lastViewName == "" ){
-    constrain += "\t"+ viewName+`.snp.makeConstraints { make in
-    	make.top.equalToSuperview().offset(Dimension.defaultMargin)
-		make.leading.trailing.equalToSuperview().inset(Dimension.defaultMargin)
-	}
-    `
+			    constrain += "\t"+ viewName+`.snp.makeConstraints { make in
+			    	make.top.equalToSuperview().offset(Dimension.defaultMargin)
+					make.leading.trailing.equalToSuperview().inset(Dimension.defaultMargin)
+				}
+			    `
             } else {
-    constrain += "\t"+ viewName+`.snp.makeConstraints { make in
-	   make.top.equalTo(self.`+ lastViewName +`.snp.bottom).offset(Dimension.defaultMargin)
-	   make.leading.trailing.equalToSuperview().inset(Dimension.defaultMargin)
-	}
-    `             
+			    constrain += "\t"+ viewName+`.snp.makeConstraints { make in
+				   make.top.equalTo(self.`+ lastViewName +`.snp.bottom).offset(Dimension.defaultMargin)
+				   make.leading.trailing.equalToSuperview().inset(Dimension.defaultMargin)
+				}
+			    `             
             }
             lastViewName = viewName
             })
@@ -297,95 +279,56 @@
     $(".responseLocalized").text(responseLocalized)       
     $(".responseLocalizedTable").html("<table>"+responseLocalizedTable+"<\/table>")
 
-    var model = `//
-    //  `+VMClassName+`.swift
-    //  MobilePanelApp
-    //
-    //  Created by Nicholas Trienens on `+date+`.
-    //  Copyright © 2017 SurveyMonkey. All rights reserved.
-    //
+    var model = `
+//
+//  `+VMClassName+`.swift
+//  App
+//
+//  Created by Nicholas Trienens on `+date+`.
+//  Copyright © 2017 Generated. All rights reserved.
+//
 
-    import UIKit
-    import RxSwift
+import UIKit
+import RxSwift
 
-    final class `+VMClassName+` {
-    enum NavigationEndpoint {
-        case changeMe
-    }
-    // Default Variables
-    let disposeBag = DisposeBag()
-    let loadStatus = BehaviorSubject<LoadStatus>(value: .none)
-    let isValid = BehaviorSubject<Bool>(value: false)
-    let navigateTo = PublishSubject<Navigate<NavigationEndpoint>>()
+final class `+VMClassName+` {
+	
+enum NavigationEndpoint {
+    case forwardchangeMe
+    case back
+}
 
-    // UIVariables
-    `+ viewModelProperties +`
-        
-    let client: Client
-    init(with client: Client) {
-        self.client = client
-    }
+// Default Variables
+let disposeBag = DisposeBag()
+let loadStatus = BehaviorSubject<LoadStatus>(value: .none)
+let isValid = BehaviorSubject<Bool>(value: false)
+let navigateTo = PublishSubject<NavigationEndpoint>()
 
-    `+viewModelMethods+`    
-    }
+// UIVariables
+`+ viewModelProperties +`
     
-    // MARK: - RxBinder -
-	extension `+VMClassName+`: RxBinder {
+let client: Client
+init(with client: Client) {
+    self.client = client
+}
+
+`+viewModelMethods+`    
+
+
+// MARK: - RxBinder -
+extension `+VMClassName+`: RxBinder {
+    
+    func setupBindings() {
 	    
-	    func setupBindings() {
-		    
-		}
 	}
+}
     `
     $(".responseSwiftVM").text(model)
 
-    var model = `package com.surveymonkey.mpa.`+KotlinPackageName+`
+   
 
-    import com.surveymonkey.mpa.common.Client
-    import com.surveymonkey.mpa.common.LoadStatus
-    import com.surveymonkey.mpa.common.Navigate
-    import com.surveymonkey.mpa.common.RxBinder
-    import io.reactivex.disposables.CompositeDisposable
-    import io.reactivex.subjects.BehaviorSubject
-    import io.reactivex.subjects.PublishSubject
-
-    /**
-    * @author Piotr Leja (FUZZ)
-    */
-
-    class `+VMClassName+`(val client: Client) : RxBinder {
-    sealed class NavigationEndpoint {
-        class changeMe : NavigationEndpoint()
-    }
-    // Default Variables
-    var disposeBag = CompositeDisposable()
-    var loadStatus = BehaviorSubject.createDefault<LoadStatus>(LoadStatus.None())
-    var isValid = BehaviorSubject.createDefault<Boolean>(false)
-    var navigateTo: PublishSubject<Navigate<NavigationEndpoint>> = PublishSubject.create()
-
-    // UIVariables
-    `+ kotlinViewModelProperties +`
-
-    `+ kotlinViewModelMethods +`
-    init {
-        setupBindings();
-    }
-
-    fun dispose() {
-        disposeBag.clear()
-    }
-
-    // RxBinder
-    override fun setupBindings() {
-
-    }
-    }
-    `;
-
-    $(".responseKotlinVM").text(model)
-
-
-    var template = `//
+    var template = `
+//
 //  ` + VCClassName + `.swift
 //  MobilePanelApp
 //
@@ -485,24 +428,18 @@ extension ` + VCClassName + `: RxBinder {
 // MARK: - RxNavigationBinder -
 extension ` + VCClassName + `: RxNavigationBinder {
     func setupNavigationBindings() {
-        
         viewModel.navigateTo
             .subscribe(
             	onNext: { [weak self] to in
 	                guard let \`self\` = self else { return }
 	
 	                switch to {
-	                case .forward(let presentation, let nextEndpoint):
-	                    
-	                    switch nextEndpoint {
-	                    case .proceed:
-	                        self.goto(ViewController(), presentationMode: presentation)
-	                    }
-	                    
+	                case .forward:
+                        self.goto(ViewController(), presentationMode: presentation)	                    
 	                case .back:
 	                    self.exit()
 	                }
-            }
+				}
             )
             .disposed(by: disposeBag)
     }
@@ -518,109 +455,7 @@ extension ` + VCClassName + `: InteractionResponder {
     `
 
     $(".responseSwiftVC").text(template)
-
-
-    var template = `package com.surveymonkey.mpa.`+KotlinPackageName+`
-
-    import com.surveymonkey.mpa.R
-    import com.surveymonkey.mpa.common.BaseFragment
-    import com.surveymonkey.mpa.common.Client
-    import com.surveymonkey.mpa.common.NavigateType
-    import com.surveymonkey.mpa.databinding.Fragment`+ClassName+`Binding
-
-    /**
-    * @author Piotr Leja (FUZZ)
-    */
-    class ` + KotlinVCClassName + `: BaseFragment<` + VMClassName + `, `+KotlinBinderClassName+`>() {
-
-    // Properties
-    private lateinit var viewModel: `+ VMClassName +`
-
-    // BaseFragment implements
-    override fun getLayoutRes(): Int {
-        return R.layout.fragment`+ ClassName.toSnake() +`
-    }
-
-    override fun generateViewModel(): `+ VMClassName +` {
-        viewModel = `+ VMClassName +`(app.client)
-        return viewModel
-    }
-
-    // MARK: RxBinder
-    override fun setupBindings() {
-        `+kotlinBinds+`
-    }
-
-    // RxNavigationBinder
-    override fun setupNavigationBindings() {
-        disposeBag.add(
-                viewModel.navigateTo.subscribe { navigate ->
-                    when(navigate.navType) {
-                        is NavigateType.Forward -> {
-                            //TODO: navigate somewhere else
-                        }
-                    }
-                }
-        )
-    }
-    }
-
-    `
-    $(".responseKotlinVC").text(template)
-
-
-    var actTemplate = `package com.surveymonkey.mpa.`+KotlinPackageName+`
-
-import android.content.Context
-import android.content.Intent
-import android.support.v4.app.Fragment
-import com.surveymonkey.mpa.common.SingleFragmentActivity
-
-/**
-* @author Piotr Leja (FUZZ)
-*/
-
-class `+ClassName+`Activity : SingleFragmentActivity() {
-
-    companion object {
-        fun createIntent(context: Context): Intent {
-            val i = Intent(context, `+ClassName+`Activity::class.java)
-            return i
-        }
-    }
-
-    override fun getInitialFragment(): Fragment {
-        return `+KotlinVCClassName+`()
-    }
-
-    override fun getInitialFragmentTag(): String {
-        return "`+KotlinVCClassName+`"
-    }
-    }`
-
-    $(".responseKotlinAct").text(actTemplate)
-
-
-    var actTemplate = `<?xml version="1.0" encoding="utf-8"?>
-    <layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
-        <variable
-            name="viewModel"
-            type=""/>
-    <\/data>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <\/FrameLayout>
-
-    <\/layout>`
-
-    $(".responseKotlinXML").text(actTemplate)
-
-
-
+   
 
     return template
     }
@@ -641,10 +476,8 @@ class `+ClassName+`Activity : SingleFragmentActivity() {
                     console.log("set to last")
 
                     $(".fname").val(data["name"])
-					$(".pname").val(data["package"])
-
+					$(".scrolls").val(data["useScrollview"])
                     $(".fdata").val(JSON.stringify(data["data"], undefined, 1))
-
                     loaded = true      
 
                 }
@@ -679,7 +512,7 @@ class `+ClassName+`Activity : SingleFragmentActivity() {
                 console.log( $(".fdata").val() );
 
                 jsonData["name"] = $(".fname").val();
-                jsonData["package"] = $(".pname").val();
+                jsonData["useScrollview"] = $(".scrolls").val();
                 jsonData["data"] = JSON.parse($(".fdata").val());
 
                 //var data = JSON.stringify(jsonData);
@@ -696,10 +529,13 @@ class `+ClassName+`Activity : SingleFragmentActivity() {
                 var retrievedObject = localStorage.getItem('pastClasses');
                 var fullObject = JSON.parse(retrievedObject)
                 var type = typeof fullObject;
+                console.log( retrievedObject);
                 console.log(type)
-                if  ( type != "object" ) {
+                if  ( type != "object" || retrievedObject == null) {
                     fullObject = []
                 }
+                console.log( fullObject);
+
                 fullObject.push(jsonData)
                 // Put the object into storage
                 localStorage.setItem('pastClasses', JSON.stringify(fullObject));
@@ -718,7 +554,6 @@ class `+ClassName+`Activity : SingleFragmentActivity() {
                 createClass(jsonData)
 
                 var VCClassName = jsonData.name + "ViewController"
-                var KotlinVCClassName = jsonData.name + "Fragment"
                 var VMClassName = jsonData.name + "ViewModel"                
                                 
                 var blob = new Blob([$(".responseSwiftVM").text()], {type: "text/plain;charset=utf-8"});
@@ -745,55 +580,7 @@ class `+ClassName+`Activity : SingleFragmentActivity() {
                 console.log('retrievedObject: ', JSON.parse(retrievedObject));
                 
             })
-            
-            $(".downloadFilesKotlin").click(function(event) {
-                event.preventDefault();
-                $(this).button('generating...')
-                                
-                                
-                var jsonData = gather()
-                createClass(jsonData)
-
-                var VCClassName = jsonData.name + "ViewController"
-                var KotlinVCClassName = jsonData.name + "Fragment"
-                var VMClassName = jsonData.name + "ViewModel"                
-
-                var blob = new Blob([$(".responseKotlinVM").text()], {type: "text/plain;charset=utf-8"});
-                saveAs(blob, VMClassName+".kt");
-
-                var blob = new Blob([$(".responseKotlinVC").text()], {type: "text/plain;charset=utf-8"});               
-                saveAs(blob, KotlinVCClassName + ".kt")
-
-                var blob = new Blob([$(".responseKotlinAct").text()], {type: "text/plain;charset=utf-8"});              
-                saveAs(blob, jsonData.name+`Activity.kt`)
-                
-                var blob = new Blob([$(".responseKotlinXML").text()], {type: "text/plain;charset=utf-8"});              
-                saveAs(blob, `fragment` + jsonData.name.toSnake() + `.xml`)
-
-                $(".downloadFiles").button('reset');
-                
-                var retrievedObject = localStorage.getItem('pastClasses');
-                var fullObject = JSON.parse(retrievedObject)
-                var type = typeof fullObject;
-                console.log(type)
-                if  ( type != "object" ) {
-                    fullObject = []
-                }
-                fullObject.push(jsonData)
-                // Put the object into storage
-                localStorage.setItem('pastClasses', JSON.stringify(fullObject));
-
-                // Retrieve the object from storage
-                var retrievedObject = localStorage.getItem('pastClasses');
-                console.log('retrievedObject: ', JSON.parse(retrievedObject));
-                
-            })
-
-          
-         });
-       
-        
-        
+         });        
     </script>
 </body>
 </html>
