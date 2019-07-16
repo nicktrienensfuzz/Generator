@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Model</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous" type="text/css">
+    <script src="https://apis.google.com/js/platform.js" async="" defer type="text/javascript">
+</script>
+    <meta name="google-signin-client_id" content="809696316591-714vqf1p7qkutiqnr0p8clddau8422to.apps.googleusercontent.com">
+</head>
+
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Swift Generator</span>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	         <div class="my-2 my-lg-0 mr-sm-2">
+                <a class=" btn btn-sm" href="index.html">mvvm</a>
+            </div>
+	         <div class="my-2 my-lg-0 mr-sm-2">
+			 	<a class="nav-link" href="/models.html">Models</a>
+			 </div>
+            <div class="my-2 my-lg-0 mr-sm-2">
+                <a class=" btn btn-sm" href="https://search-nick-test-xytkb2r5moejnacbgxelsitibq.us-east-1.es.amazonaws.com/_plugin/kibana/app/kibana" target="_blank">Kibana</a>
+            </div>
+
+        </div>
+    </nav>
+    
+    <div class="container-fluid" style="margin:25px;">
+        <div class="row">
+            <h1>Model</h1>
+        </div>
+
+        <form class="form ajaxForm" action="/" method="get">
+            <div class="row">
+                <div class="form-group">
+                    <label for="fname">Class Name</label><br>
+                    <input name="fname" rows="5" cols="50" class="fname" id="fname" value="Permissions">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="fname">Package Suffix</label><br>
+                    <input name="pname" rows="5" cols="50" class="pname disabled" id="pname" value="models" disabled="true">
+                </div>
+            </div><!--
+             <div class="form-group hide hidden">
+                <label for="scrolls">ScrollView?</label><br>
+                <input type="checkbox" name="scrolls" rows="5" cols="50" class="scrolls" id="hasVerticalScroll" value="1" >
+            </div>
+-->
+
+            <div class="row">
+                <div class="col col-lg-8 form-group">
+                    <label for="fdata">Swagger Json Schema</label><br>
+                    <textarea rows="15" cols="90" name="fdata" id="fdata" class="fdata form-control">
+   {"Widget": {
+      "type": "object",
+      "required": [
+        "title",
+        "type"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "buttonTitle": {
+          "type": "string"
+        },
+        "buttonAction": {
+          "type": "string",
+          "enum": [
+            "EnablePush",
+            "EnableGeo",
+            "CloseMessage",
+            "TakeSurvey",
+            "Profiler"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Message",
+            "Dismissable",
+            "ActionableMessage",
+            "GeoMessageNudge",
+            "GeoMessageForce",
+            "TakeSurvey"
+          ]
+        },
+        "reward": {
+          "type": "integer",
+          "description": "$ in cents"
+        },
+        "linkUrl": {
+          "type": "string",
+          "description": "url to send the user to"
+        }
+      },
+      "description": "Support the Data for flexible widgets",
+      "example": "        {\n            \"title\": \"Hello, firstname\",\n             \"subtitle\" : null,\n            \"body\": \"You have a new survey available.\",\n            \"buttonTitle\":\"Take Survey\",\n            \"reward\" : 25,\n            \"imageUrl\": null,\n            \"buttonAction\": \"TakeSurvey\",\n            \"type\": \"TakeSurvey\",\n          \"linkUrl\":\"http://cnn.com\"\n        }\n"
+    }
+    }
+   
+</textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <input class="btn btn-primary sendForm" type="submit" value="Submit" autocomplete="off"> &nbsp;&nbsp;&nbsp; <input class="btn btn-primary downloadFiles" type="submit" value="Download" autocomplete="off">&nbsp;&nbsp;&nbsp;
+            </div>
+        </form>
+
+        <div class="row">
+            <br>
+            Localized Strings
+        </div>
+
+        <div class="row">
+            <br>
+        </div>
+
+        <div class="row">
+            <div class="col col-lg-6">
+                Swift ViewModel
+                <pre class="responseSwiftM alert alert-secondary">
+ Submit for class 
+</pre>
+            </div>
+
+            <div class="col col-lg-6">
+                Kotlin ViewModel
+                <pre class="responseKotlinM alert alert-secondary">
+ Submit for class 
+</pre>
+            </div>
+        </div>
+    </div><script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" type="text/javascript">
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous" type="text/javascript">
+</script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous" type="text/javascript">
+</script><script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js" crossorigin="anonymous" type="text/javascript">
+</script><script type="text/javascript">
+    
+        function jsUcfirst(string)
+        {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+          function jsLcfirst(string)
+        {
+            return string.charAt(0).toLowerCase() + string.slice(1);
+        }
+        function camelize(str) {
+            str = str.replace("_", " ")
+            str = str.replace("-", " ")
+          return str.replace(/(?:^\w|[A-Z]|\b\w|_)/g, function(letter, index) {
+            return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
+          }).replace(/\s+/g, '');
+        }
+        function createClass(jsonData) {
+
+            var KotlinPackageName = jsonData.package
+            var ClassName = jsonData.name
+            
+            console.log(jsonData.data)
+            var dictionary = {}
+            for ( var field in jsonData.data) {
+                dictionary = jsonData.data[field]
+            }
+            console.log(dictionary)
+    /*
+            
+            forEach(function(Class) { 
+                var dictionary = jsonData.data[Class]
+            })
+    */
+            
+            var swiftViewModelProperties = ""
+            var swiftViewModelMethods = ""
+            var swiftViewModelPropertiesCoding = ""
+            var swiftDecoding = ""
+            
+            var kotlinViewModelMethods = ""
+            var kotlinViewModelProperties = ""
+            var kotlinViewModelPropertiesDocs = "";
+            var lastViewName = ""
+            var swiftEnums = ""
+            var kotlinEnums = ""
+
+            var myDate = new Date()
+            var date = (myDate.getMonth() + 1) + "/" + myDate.getDate() + "/" + myDate.getFullYear()
+
+            var required = []               
+            if ( dictionary.hasOwnProperty("required")) { 
+                required = dictionary.required
+            }
+            console.log(dictionary.properties);
+            for ( var field in dictionary.properties) {
+                var def = dictionary.properties[field]
+                var jsonFieldName = field
+                
+                var fieldName = jsLcfirst(camelize(field))
+                console.log(fieldName)
+                var type = def['type']
+                
+                var isRequired = required.includes(field)
+                
+                if ( def.hasOwnProperty("enum")) { 
+                    var enumValues = def["enum"]
+                    type = jsUcfirst(fieldName) + "Values"
+                    
+                    var enumCreate = `\tenum `+type+": String, Codable {\n"
+                    enumValues.forEach(function(val) {
+                        enumCreate += `\t\tcase `+ jsLcfirst(val) + ` = "`+ val+`"\n`
+                    })
+                    enumCreate += `\t}\n`
+                    swiftEnums += enumCreate
+                } else if (type == "array") {
+                    var arrayValue = def["items"]["$ref"]
+                    if(arrayValue != undefined ){
+                        type  = `[` + arrayValue.replace('#/definitions/', '') + `]`
+                    } else {
+	                    type  = `[` + jsUcfirst(def["items"]["type"]) + `]`	                    
+                    }                    
+                } else if (type == "integer") {
+                    type = "Int"
+                } else if (type == "boolean") {
+                    type = "Bool"
+                } else if (type == "object") {
+                    type = "[String: Bool]"
+                } else {
+                    type = jsUcfirst(type)
+                }         
+                
+                
+                if (isRequired){
+                    swiftDecoding += `\t`+ fieldName +` = try values.decode(`+type +`.self, forKey: .`+fieldName+`)\n\t`
+                } else {
+                    swiftDecoding += `\t`+ fieldName +` = try values.decodeIfPresent(`+type +`.self, forKey: .`+fieldName+`)\n\t`
+                }
+
+                if (isRequired == false){
+                    type += "?"
+                }
+                
+
+                swiftViewModelPropertiesCoding += "\t\tcase "+fieldName+` = "`+ jsonFieldName +`"\n`
+                var description = def['description'];
+                if( description != undefined) {
+                	swiftViewModelProperties += `\t/// `+fieldName + `\n`
+                	if (isRequired) {
+                		swiftViewModelProperties += `\t/// Required\n`
+                	}
+                	swiftViewModelProperties += `\t/// ` + description + `\n`;
+                }
+                swiftViewModelProperties += `\tvar `+fieldName+`: `+type +`\n\n`;
+                
+                
+            }
+            
+            var kotlinAdapter = ""
+            
+            for ( var field in dictionary.properties) {
+                var def = dictionary.properties[field]
+                var jsonFieldName = field
+                var fieldName = jsLcfirst(camelize(field))
+                console.log(fieldName)
+                var type = def['type']
+                
+                var isRequired = required.includes(field)
+                
+                if ( def.hasOwnProperty("enum")) { 
+                    var enumValues = def["enum"]
+                    var enumPaser = ""
+                    type = jsUcfirst(fieldName) + "Values"
+                    
+                    var enumCreate = "sealed class "+type+" {\n"
+                    enumValues.forEach(function(val) {
+                    enumCreate += "\tclass "+ jsUcfirst(val) + `: `+ type+`()\n`
+                    enumPaser += "\t\t"+ ClassName +`.`+type+`.`+jsUcfirst(val)+`::class.simpleName -> {
+    \t\t\treturn `+ClassName+`.`+type+`.`+jsUcfirst(val)+`()
+    \t\t}\n`
+                    })
+                    enumCreate += "}\n"
+                    kotlinEnums += enumCreate
+                    
+                    kotlinAdapter += `\nclass `+ ClassName + type+`Adapter {
+
+    @ToJson
+    fun toJson(actionValue: `+ClassName+`.`+type+`) : String =
+            actionValue::class.simpleName.toString()
+
+    @FromJson
+    fun fromJson(actionValue : String) : `+ClassName+`.`+type+`? {
+        when(actionValue) {
+    `+ enumPaser +`\t\telse -> {
+        \t\treturn null
+    \t\t}
+    \t}\n}\n`
+                    
+                    
+                } else if (type == "array") {
+                    var arrayValue = def["items"]["$ref"]
+                    if(arrayValue != undefined ){
+                        type  = `Array<` + arrayValue.replace('#/definitions/', '') + `>`
+                    } else {
+	                    type  = `Array<` + jsUcfirst(def["items"]["type"]) + `>`	                    
+                    }  
+                    
+                } else if (type == "integer") {
+                    type = "Int"
+                } else if (type == "boolean") {
+                    type = "Boolean"
+                } else if (type == "object") {
+                    type = "Map<String, Boolean>"
+                } else {
+                    type = jsUcfirst(type)
+                }         
+                
+                if (isRequired == false){
+                    type += "? = null"
+                }
+                
+                kotlinViewModelProperties += `\t@Json(name = "`+ jsonFieldName+`") val `+fieldName+`: `+type +`,\n`
+				
+				var description = def['description'];
+                if( description != undefined) {
+                	kotlinViewModelPropertiesDocs += `* @property `+fieldName + ` `  
+                	if (isRequired) {
+                		kotlinViewModelPropertiesDocs += ` <b>Required</b>`
+                	}
+                	kotlinViewModelPropertiesDocs += description + `\n`
+                }
+            }
+
+    kotlinViewModelProperties = kotlinViewModelProperties.substring(0, kotlinViewModelProperties.length-2);
+
+            
+       
+    var model = `
+//
+//  `+ClassName+`.swift
+//  MobilePanelApp
+//
+//  Created by Nicholas Trienens on `+date+`.
+//  Copyright © 2017 SurveyMonkey. All rights reserved.
+//
+
+struct `+ClassName+`: Codable {
+
+`+ swiftViewModelProperties +`
+`+ swiftEnums +`   
+	enum CodingKeys: String, CodingKey {
+`+ swiftViewModelPropertiesCoding +`    
+	}
+    
+	init(from decoder: Decoder) throws {
+		let values = try decoder.container(keyedBy: CodingKeys.self)
+		`+swiftDecoding+`
+	}
+`+ swiftViewModelMethods +` 
+
+	static let exampleJson: String = """
+	`+ dictionary.example +`\n"""
+	}
+	
+/// Implement Hashable and Equatable
+/// use the simplest Primary key possible	
+extension `+ClassName+`: Hashable {
+    var hashValue: Int {
+        return id.hashValue
+    }
+
+    static func == (lhs: `+ClassName+`, rhs: `+ClassName+`) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+	`
+    $(".responseSwiftM").text(model)
+
+    var model = `package com.surveymonkey.mpa.`+KotlinPackageName+`
+
+import com.squareup.moshi.FromJson
+import com.squareup.moshi.Json
+import com.squareup.moshi.ToJson
+/**
+* @author Piotr Leja (FUZZ)
+*/
+
+
+/**
+ * A `+ClassName+`.
+ *
+ * TODO: Define My usage.
+ *
+`+ kotlinViewModelPropertiesDocs +`*/
+
+ data class `+ClassName+`(`+ kotlinViewModelProperties +` )  {
+
+    `+ kotlinEnums +`
+}
+
+    `+ kotlinAdapter +`
+    `;
+
+    $(".responseKotlinM").text(model)
+
+
+
+    }
+
+    String.prototype.toSnake = function(){
+    return this.replace(/([A-Z])/g, function($1){return "_"+$1.toLowerCase(); });
+    };
+        
+       $(document).ready(function() {
+              var loaded = false      
+            var retrievedObject = localStorage.getItem('pastModelSwag');
+            if (retrievedObject != undefined ){
+                var fullObject = JSON.parse(retrievedObject) 
+                var data = fullObject[fullObject.length -1]      
+                if (data != undefined ){
+                                    
+                    console.log("set to last")
+
+                    $(".fname").val(data["name"])
+                    $(".pname").val("Models")
+
+                    $(".fdata").val(JSON.stringify(data["data"], undefined, 1))
+
+                    loaded = true      
+
+                }
+            }
+            
+            if (loaded) {
+                var fullObject = []
+                localStorage.setItem('pastModelSwag', JSON.stringify(fullObject));
+
+            }
+
+                         
+            function gather() {
+                var jsonData = {};
+
+                //console.log( $(".fdata").val() );
+
+                jsonData["name"] = $(".fname").val();
+                jsonData["package"] = $(".pname").val();
+                jsonData["data"] = JSON.parse($(".fdata").val());
+
+                //var data = JSON.stringify(jsonData);
+               // console.log( jsonData );
+                
+                var retrievedObject = localStorage.getItem('pastModelSwag');
+                if (retrievedObject != undefined ) {
+                    var fullObject = JSON.parse(retrievedObject)
+                    var type = typeof fullObject;
+                    //console.log(type)
+                } else {
+                    fullObject = []
+                }
+                fullObject.push(jsonData)
+                // Put the object into storage
+                localStorage.setItem('pastModelSwag', JSON.stringify(fullObject));
+
+                // Retrieve the object from storage
+                var retrievedObject = localStorage.getItem('pastModelSwag');
+                //console.log('retrievedObject: ', JSON.parse(retrievedObject));
+
+                return jsonData;
+            }
+                         
+            $(".sendForm").click(function(event) {
+                 event.preventDefault();
+                var jsonData = gather()
+                 $(this).button('generating...')
+                 createClass(jsonData);
+
+                $(".sendForm").button('reset');
+            })
+            
+            $(".downloadFiles").click(function(event) {
+                event.preventDefault();
+                $(this).button('generating...')
+                                
+                                
+                var jsonData = gather()
+                createClass(jsonData)
+
+                var ClassName = jsonData.name                
+                                
+                var blob = new Blob([$(".responseSwiftM").text()], {type: "text/plain;charset=utf-8"});
+                saveAs(blob, ClassName+".swift");
+                          
+                var blob = new Blob([$(".responseKotlinM").text()], {type: "text/plain;charset=utf-8"});
+                saveAs(blob, ClassName+".kt");
+                                
+                $(".downloadFiles").button('reset');
+                
+            })
+            
+             
+            console.log("onLoadCallback");
+            gapi.load('auth2', function(){
+                    /**
+                     * Retrieve the singleton for the GoogleAuth library and set up the
+                     * client.
+                     */
+                    auth2 = gapi.auth2.init({
+                        client_id: '809696316591-714vqf1p7qkutiqnr0p8clddau8422to.apps.googleusercontent.com'
+                    })
+                    
+                    auth2.then(function() {
+
+                    
+                        console.log(auth2);
+
+                        if(auth2.isSignedIn.get() == false ){
+                            window.location = "http://intercept.fuzzproductionswest.com/";                      
+                        }
+                        var profile = auth2.currentUser.get().getBasicProfile();
+                        console.log("profile");
+
+                        console.log(profile);
+                    })
+                    
+            });
+             
+         });
+        
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+                window.location = "http://intercept.fuzzproductionswest.com/";
+            });
+        }
+        
+        
+        var auth2;
+        window.onLoadCallback = function(){
+            console.log("onLoadCallback");
+            gapi.load('auth2', function(){
+                    /**
+                     * Retrieve the singleton for the GoogleAuth library and set up the
+                     * client.
+                     */
+                    auth2 = gapi.auth2.init({
+                        client_id: '809696316591-714vqf1p7qkutiqnr0p8clddau8422to.apps.googleusercontent.com'
+                    })
+                    
+                    auth2.then(function() {
+
+                    
+                        console.log(auth2);
+
+                        if(auth2.isSignedIn.get() == false ){
+                            window.location = "http://intercept.fuzzproductionswest.com/";                      
+                        }
+                        var profile = auth2.currentUser.get().getBasicProfile();
+                        console.log("profile");
+
+                        console.log(profile);
+                    })
+                    
+            });
+        }   
+        
+    </script>
+</body>
+</html>
