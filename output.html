@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Model</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous" type="text/css">
+    <script src="https://apis.google.com/js/platform.js" async="" defer type="text/javascript">
+</script>
+    <meta name="google-signin-client_id" content="809696316591-714vqf1p7qkutiqnr0p8clddau8422to.apps.googleusercontent.com">
+</head>
+
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Swift Generator:: Output</span>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	         <div class="my-2 my-lg-0 mr-sm-2">
+                <a class=" btn btn-sm" href="index.html">mvvm</a>
+            </div>
+	         <div class="my-2 my-lg-0 mr-sm-2">
+			 	<a class="nav-link" href="/models.html">Models</a>
+			 </div>
+        </div>
+    </nav>
+    
+    <div class="container-fluid" style="margin:25px;">
+        <div class="row">
+            <h1>Model</h1>
+        </div>
+
+        <form class="form ajaxForm" action="/" method="get">
+            <div class="row">
+                <div class="form-group">
+                    <label for="fname">Class Name</label><br>
+                    <input name="fname" rows="5" cols="50" class="fname" id="fname" value="Data">
+                </div>
+            </div>
+            
+            <div class="form-group hide hidden">
+                <label for="Decoding">Advanced Decoding?</label>
+                <input type="checkbox" name="Decoding" class="Decoding" id="Decoding" value="1" >
+            </div>
+            
+            <div class="row">
+                <div class="col col-lg-8 form-group">
+                    <label for="fdata">Paste current ViewModel Streams</label><br>
+                    <textarea rows="15" cols="90" name="fdata" id="fdata" class="fdata form-control">
+   	let image = PublishSubject<URL?>()
+	let quantity = ReplaySubject<String>.create()
+	let description = ReplaySubject<String>.create()
+	let calories = ReplaySubject<String>.create()
+	let priceString = ReplaySubject<String>.create()
+	let allergens = ReplaySubject<String>.create()   
+	    private let viewStyle = BehaviorSubject<ProductOptionCell.ViewStyle>(value: [])
+
+</textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <input class="btn btn-primary sendForm" type="submit" value="Submit" autocomplete="off"> &nbsp;&nbsp;&nbsp; <input class="btn btn-primary downloadFiles" type="submit" value="Download" autocomplete="off">&nbsp;&nbsp;&nbsp;
+            </div>
+        </form>
+
+        <div class="row">
+<H2>Guidlines</H2><br><br>
+	* Use RxCocoa in the viewModel? ControlEvent? <br>
+	* Should we use an Input Type allowing for a generic constraint?
+        </div>
+
+        <div class="row">
+            <br>
+        </div>
+
+        <div class="row">
+            <div class="col col-lg-8">
+                Swift ViewModel
+                <pre class="responseSwiftM alert alert-secondary">
+ Submit for class 
+</pre>
+            </div>
+
+                  </div>
+    </div><script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" type="text/javascript">
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous" type="text/javascript">
+</script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous" type="text/javascript">
+</script><script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js" crossorigin="anonymous" type="text/javascript">
+</script><script type="text/javascript">
+    
+        function jsUcfirst(string)
+        {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+          function jsLcfirst(string)
+        {
+            return string.charAt(0).toLowerCase() + string.slice(1);
+        }
+        
+        String.prototype.toSnake = function(){
+	    	return this.replace(/([A-Z])/g, function($1){return "_"+$1.toLowerCase(); });
+    	};
+         
+        
+        function camelize(str) {
+            str = str.replace(/_/g, " ")
+            str = str.replace(/-/g, " ")
+          return str.replace(/(?:^\w|[A-Z]|\b\w|_)/g, function(letter, index) {
+            return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
+          }).replace(/\s+/g, '');
+        }
+
+
+        
+        function createClass(jsonData) {
+
+            var ClassName = "Output";
+            var Model = "";
+            var Builder = `
+            
+    typealias Output = `+jsonData.name+`.Output
+    typealias Input = `+jsonData.name+`.Input
+            
+      
+      let input =  Input(viewWillAppear: rx.viewWillAppear.map { _ in } )
+      let output = viewModel.buildOutput(input)
+      
+            
+            // MARK: - OutputBuilder -
+extension `+jsonData.name+`: OutputBuilder {
+    typealias I = Input
+    typealias O = Output
+    
+    struct Input {
+        let viewWillAppear: Observable<Void>
+    }
+
+    func buildOutput(_ input: I) -> O {
+	    
+	    input.viewWillAppear
+            .subscribe(onNext: { [weak self] in self?.logScreenView() })
+            .disposed(by: disposeBag)
+	
+`
+
+			var builderLocals = ""
+			var builderCreate = "return Output("
+            
+            console.log(jsonData.body)
+			
+			var nameRE = /let (.*?)\s?[=:]/;
+			var typeRE = /<(.*)>/;
+			
+			var lines = jsonData.body.split("\n")
+			lines.forEach(function(element) {
+				
+				var found = element.match(nameRE);
+				console.log(found);
+				if (found !== null && found.length == 2) {
+					var name = found[1]
+					var foundType = element.match(typeRE);
+					console.log(foundType);
+					if (foundType !== null && foundType.length == 2) {
+						var type = foundType[1]
+						
+						builderLocals += "let " + name + "Observable: Observable<"+ type + "> \n";
+						
+						Model += "let " + name+ ": Observable<"+ type + "> \n";
+						builderCreate += name+": "+ name + "Observable,\n" 
+					} else {
+					    console.log("Name found but not type: " + name)
+					}
+				}
+			});
+            builderCreate = builderCreate.substring(0, builderCreate.length-2) + " ) \n}\n}";
+
+			$(".responseSwiftM").text("// MARK: - output -\nstruct Output {\n"+ Model +"}\n\n" + Builder + builderLocals +  builderCreate);
+
+		}        
+        
+        
+    const localStorageName =  'OutputModelSwag';
+        
+   $(document).ready(function() {
+        var loaded = false      
+		var retrievedObject = localStorage.getItem(localStorageName);
+        console.log(retrievedObject)
+        if (retrievedObject != undefined ){
+            var fullObject = JSON.parse(retrievedObject) 
+            var data = fullObject[fullObject.length -1]      
+            if (data != undefined ){
+                                
+                console.log("set to last")
+
+                $(".fname").val(data["name"])
+				$(".Decoding").val(data["advancedDecoding"])
+                $(".fdata").val(data["body"])
+
+                loaded = true      
+
+            }
+        }
+
+        function gather() {
+            var jsonData = {};
+
+            console.log( $(".fdata").val() );
+
+            jsonData["name"] = $(".fname").val();
+            jsonData["body"] = $(".fdata").val();
+            jsonData["advancedDecoding"] = $(".Decoding").val();
+            
+			var retrievedObject = localStorage.getItem(localStorageName);
+            if (retrievedObject != undefined ) {
+                var fullObject = JSON.parse(retrievedObject)
+                var type = typeof fullObject;
+                //console.log(type)
+            } else {
+                fullObject = []
+            }
+            fullObject.push(jsonData)
+            // Put the object into storage
+            localStorage.setItem(localStorageName, JSON.stringify(fullObject));
+
+            // Retrieve the object from storage
+            var retrievedObject = localStorage.getItem(localStorageName);
+            
+            return jsonData;
+        }
+                     
+        $(".sendForm").click(function(event) {
+             event.preventDefault();
+            var jsonData = gather()
+             $(this).button('generating...')
+             createClass(jsonData);
+
+            $(".sendForm").button('reset');
+        })
+        
+        $(".downloadFiles").click(function(event) {
+            event.preventDefault();
+            $(this).button('generating...')
+                                  
+            var jsonData = gather()
+            createClass(jsonData)
+
+            var ClassName = jsonData.name                
+                            
+            var blob = new Blob([$(".responseSwiftM").text()], {type: "text/plain;charset=utf-8"});
+            saveAs(blob, ClassName+".swift");
+                                            
+            $(".downloadFiles").button('reset');
+            
+        })
+               
+     });
+     
+        
+    </script>
+</body>
+</html>

@@ -148,8 +148,8 @@
             return string.charAt(0).toLowerCase() + string.slice(1);
         }
         function camelize(str) {
-            str = str.replace("_", " ")
-            str = str.replace("-", " ")
+            str = str.replace(/_/g, " ")
+            str = str.replace(/-/g, " ")
           return str.replace(/(?:^\w|[A-Z]|\b\w|_)/g, function(letter, index) {
             return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
           }).replace(/\s+/g, '');
