@@ -126,14 +126,8 @@
             var ClassName = "Output";
             var Model = "";
             var Builder = `
-            
-    typealias Output = `+jsonData.name+`.Output
-    typealias Input = `+jsonData.name+`.Input
-            
-      
-      let input =  Input(viewWillAppear: rx.viewWillAppear.map { _ in } )
-      let output = viewModel.buildOutput(input)
-      
+    
+//ViewModel extension            
             
             // MARK: - OutputBuilder -
 extension `+jsonData.name+`: OutputBuilder {
@@ -146,14 +140,14 @@ extension `+jsonData.name+`: OutputBuilder {
 
     func buildOutput(_ input: I) -> O {
 	    
-	    input.viewWillAppear
+	 input.viewWillAppear
             .subscribe(onNext: { [weak self] in self?.logScreenView() })
             .disposed(by: disposeBag)
 	
 `
 
 			var builderLocals = ""
-			var builderCreate = "return Output("
+			var builderCreate = "\treturn Output("
             
             console.log(jsonData.body)
 			
@@ -172,16 +166,29 @@ extension `+jsonData.name+`: OutputBuilder {
 					if (foundType !== null && foundType.length == 2) {
 						var type = foundType[1]
 						
-						builderLocals += "let " + name + "Observable: Observable<"+ type + "> \n";
+						builderLocals += "\tlet " + name + "Observable: Observable<"+ type + "> \n";
 						
-						Model += "let " + name+ ": Observable<"+ type + "> \n";
-						builderCreate += name+": "+ name + "Observable,\n" 
+						Model += "\t\tlet " + name+ ": Observable<"+ type + "> \n";
+						builderCreate += name+": "+ name + "Observable,\n\t\t" 
 					} else {
 					    console.log("Name found but not type: " + name)
 					}
 				}
 			});
-            builderCreate = builderCreate.substring(0, builderCreate.length-2) + " ) \n}\n}";
+            builderCreate = builderCreate.substring(0, builderCreate.length-4) + " ) \n\t}\n}";
+
+       builderCreate += `
+       
+       
+//TypeAilais for the ViewController            
+    typealias Output = `+jsonData.name+`.Output
+    typealias Input = `+jsonData.name+`.Input
+            
+      
+    let input =  Input(viewWillAppear: rx.viewWillAppear.map { _ in } )
+    let output = viewModel.buildOutput(input)
+      
+        `;
 
 			$(".responseSwiftM").text("// MARK: - output -\nstruct Output {\n"+ Model +"}\n\n" + Builder + builderLocals +  builderCreate);
 
