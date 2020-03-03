@@ -51,62 +51,9 @@
                 <div class="col col-lg-8 form-group">
                     <label for="fdata">Swagger Json Schema, or swift type notation</label><br>
                     <textarea rows="15" cols="90" name="fdata" id="fdata" class="fdata form-control">
-   {"Widget": {
-      "type": "object",
-      "required": [
-        "title",
-        "type"
-      ],
-      "properties": {
-        "title": {
-          "type": "string"
-        },
-        "subtitle": {
-          "type": "string"
-        },
-        "body": {
-          "type": "string"
-        },
-        "imageUrl": {
-          "type": "string"
-        },
-        "buttonTitle": {
-          "type": "string"
-        },
-        "buttonAction": {
-          "type": "string",
-          "enum": [
-            "EnablePush",
-            "EnableGeo",
-            "CloseMessage",
-            "TakeSurvey",
-            "Profiler"
-          ]
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "Message",
-            "Dismissable",
-            "ActionableMessage",
-            "GeoMessageNudge",
-            "GeoMessageForce",
-            "TakeSurvey"
-          ]
-        },
-        "reward": {
-          "type": "integer",
-          "description": "$ in cents"
-        },
-        "linkUrl": {
-          "type": "string",
-          "description": "url to send the user to"
-        }
-      },
-      "description": "Support the Data for flexible widgets",
-      "example": "        {\n            \"title\": \"Hello, firstname\",\n             \"subtitle\" : null,\n            \"body\": \"You have a new survey available.\",\n            \"buttonTitle\":\"Take Survey\",\n            \"reward\" : 25,\n            \"imageUrl\": null,\n            \"buttonAction\": \"TakeSurvey\",\n            \"type\": \"TakeSurvey\",\n          \"linkUrl\":\"http://cnn.com\"\n        }\n"
-    }
-    }
+
+        let title: string
+var      subtitle: string
 
 </textarea>
                 </div>
@@ -154,18 +101,30 @@
         function createClass(jsonData) {
 
             var ClassName = jsonData.name
-
-            console.log(jsonData.data)
-            var dictionary = {}
-            for ( var field in jsonData.data) {
-                dictionary = jsonData.data[field]
+            var schema = jsonData.data
+            console.log(schema)
+            var properties = [];
+            let lines = schema.split("\n")
+            console.log(lines);
+            for ( var index in lines) {
+                let field = lines[index]
+                field = field.trim()
+                if (field.length < 3 ){
+                  continue;
+                }
+                let result = field.match(/(var)|(let)/);
+                if (result !== undefined && result !== null && result.length > 0 ){
+                  field = field.replace( /(var)|(let)/, "" ).trim()
+                }
+                console.log(field);
+                properties.push(field)
             }
-            console.log(dictionary)
+            console.log(properties)
 
             var swiftViewModelProperties = ""
             var swiftModelEquatableProperties = ""
             var swiftModelHashableProperties = ""
-			var swiftInit = "init("
+			         var swiftInit = "init("
 
             var swiftViewModelMethods = ""
             var swiftViewModelPropertiesCoding = ""
@@ -184,7 +143,7 @@
             console.log(dictionary.properties);
             for ( var field in dictionary.properties) {
 	            var def = dictionary.properties[field]
-				var type = def['type']
+				          var type = def['type']
 
                 var fieldName = jsLcfirst(camelize(field))
                 var isRequired = required.includes(field)
@@ -341,7 +300,7 @@ extension `+ClassName+`: Hashable {
 	    return this.replace(/([A-Z])/g, function($1){return "_"+$1.toLowerCase(); });
     };
 
-    const localStorageName =  'pastModelSwag';
+    const localStorageName =  'pastModelSwiftSwag';
 
    $(document).ready(function() {
         var loaded = false
@@ -349,16 +308,19 @@ extension `+ClassName+`: Hashable {
         console.log(retrievedObject)
         if (retrievedObject != undefined ){
             var fullObject = JSON.parse(retrievedObject)
+
             var data = fullObject[fullObject.length -1]
-            if (data != undefined ){
+            console.log(data)
+            if (data != undefined && true ){
 
                 console.log("set to last")
 
                 $(".fname").val(data["name"])
                 $(".pname").val(data["data"])
-				$(".Decoding").val(data["advancedDecoding"])
+				        $(".Decoding").val(data["advancedDecoding"])
 
-                $(".fdata").val(JSON.stringify(data["data"], undefined, 1))
+                $(".fdata").val(data["data"])
+                //$(".fdata").val(JSON.stringify(data["data"], undefined, 1))
 
                 loaded = true
 
@@ -380,10 +342,10 @@ extension `+ClassName+`: Hashable {
             //console.log( $(".fdata").val() );
 
             jsonData["name"] = $(".fname").val();
-            jsonData["data"] = JSON.parse($(".fdata").val());
+            jsonData["data"] = $(".fdata").val();
             jsonData["advancedDecoding"] = $(".Decoding").val();
 
-            var retrievedObject = localStorage.getItem('pastModelSwag');
+            var retrievedObject = localStorage.getItem(localStorageName);
             if (retrievedObject != undefined ) {
                 var fullObject = JSON.parse(retrievedObject)
                 var type = typeof fullObject;
@@ -392,11 +354,13 @@ extension `+ClassName+`: Hashable {
                 fullObject = []
             }
             fullObject.push(jsonData)
+            console.log( jsonData );
+
             // Put the object into storage
-            localStorage.setItem('pastModelSwag', JSON.stringify(fullObject));
+            localStorage.setItem(localStorageName, JSON.stringify(fullObject));
 
             // Retrieve the object from storage
-            var retrievedObject = localStorage.getItem('pastModelSwag');
+            var retrievedObject = localStorage.getItem(localStorageName);
             //console.log('retrievedObject: ', JSON.parse(retrievedObject));
             return jsonData;
         }

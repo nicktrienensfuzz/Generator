@@ -7,291 +7,324 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>MVVM</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"
+          type="text/css">
 
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1">Swift Generator</span>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Swift Generator</span>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	        <div class="my-2 my-lg-0 mr-sm-2">
-				<a class="nav-link" href="index.html">MVVM</a>
-            </div>
-
-		    <div class="my-2 my-lg-0 mr-sm-2">
-                <a class=" btn btn-sm" href="model.html">Models</a>
-            </div>
-            		   <div class="my-2 my-lg-0 mr-sm-2">
-                <a class="btn btn-sm" href="output.html">Output</a>
-            </div>
-
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="my-2 my-lg-0 mr-sm-2">
+            <a class="nav-link" href="index.html">MVVM</a>
         </div>
-    </nav>
 
-    <div class="container-fluid" style="margin:25px;">
+        <div class="my-2 my-lg-0 mr-sm-2">
+            <a class=" btn btn-sm" href="model.html">Models</a>
+        </div>
+        <div class="my-2 my-lg-0 mr-sm-2">
+            <a class="btn btn-sm" href="output.html">Output</a>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container-fluid" style="margin:25px;">
+    <div class="row">
+        <h1>View Controller + View Model</h1>
+    </div>
+
+    <form class="form ajaxForm" action="/" method="get">
         <div class="row">
-            <h1>View Controller + View Model</h1>
+            <div class="form-group">
+                <label for="fname">Class Name</label>
+                <span>( + ViewController, + ViewModel)<br>
+                    <input name="fname" rows="5" cols="50" class="fname" id="fname" value="Permissions">
+                </span>
+            </div>
         </div>
 
-        <form class="form ajaxForm" action="/" method="get">
-            <div class="row">
-                <div class="form-group">
-                    <label for="fname">Class Name</label> <span>( + ViewController, + ViewModel)<br>
-                    <input name="fname" rows="5" cols="50" class="fname" id="fname" value="Permissions">
+
+        <div class="form-group hide hidden">
+            <label for="scrolls">ScrollView?</label>
+            <input type="checkbox" name="scrolls" rows="5" cols="50" class="scrolls" id="hasVerticalScroll" value="1">
+        </div>
+
+
+        <div class="row">
+            <div class="col col-lg-8 form-group">
+                <label for="fdata">Schema Json</label>
+
+                <div>
+                    allowed Types: <span class="badge badge-secondary">TextField</span> <span
+                        class="badge badge-secondary">Label</span> <span class="badge badge-secondary">RxLabel</span>
+                    <span class="badge badge-secondary">Button</span> <span
+                        class="badge badge-secondary">ImageView</span>
+                    <!--                    <span class="badge badge-secondary">RxImageView</span> -->
                 </div>
-            </div>
-
-         
-            <div class="form-group hide hidden">
-                <label for="scrolls">ScrollView?</label>
-                <input type="checkbox" name="scrolls" rows="5" cols="50" class="scrolls" id="hasVerticalScroll" value="1" >
-            </div>
-
-
-            <div class="row">
-                <div class="col col-lg-8 form-group">
-                    <label for="fdata">Schema Json</label>
-
-                    <div>
-                        allowed Types: <span class="badge badge-secondary">TextField</span> <span class="badge badge-secondary">Label</span> <span class="badge badge-secondary">RxLabel</span> <span class="badge badge-secondary">Button</span> <span class="badge badge-secondary">ImageView</span> <!--                    <span class="badge badge-secondary">RxImageView</span> -->
-                    </div><br>
-                    <textarea rows="15" cols="50" name="fdata" id="fdata" class="fdata form-control">
+                <br>
+                <textarea rows="15" cols="50" name="fdata" id="fdata" class="fdata form-control">
 {
 "views":[
     {"name":"firstName", "type":"RxLabel", "text":"welcome"},
     {"name":"email", "type":"TextField", "text":"enter your name"},
      {"name":"logoImage", "type":"ImageView"}
-    
+
 ]
 }
 					</textarea>
-                </div>
             </div>
-
-
-            <div class="row">
-                <input class="btn btn-primary sendForm" type="submit" value="Submit" autocomplete="off"> &nbsp;&nbsp;&nbsp; <input class="btn btn-primary downloadFilesSwift" type="submit" value="Download Swift" autocomplete="off">&nbsp;
-            </div>
-        </form>
-
-        <div class="row">
-            <br>
-            Localized Strings
         </div>
 
+
         <div class="row">
-            <div class="col col-lg-6">
+            <input class="btn btn-primary sendForm" type="submit" value="Submit" autocomplete="off"> &nbsp;&nbsp;&nbsp;
+            <input class="btn btn-primary downloadFilesSwift" type="submit" value="Download Swift" autocomplete="off">&nbsp;
+        </div>
+    </form>
+
+    <div class="row">
+        <br>
+        Localized Strings
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-6">
                 <pre class="responseLocalized alert alert-secondary">
-					Submit for Localized Strings 
+					Submit for Localized Strings
 				</pre>
-            </div>
         </div>
-             
-		<div class="row">
-			 <div class="col col-lg-6">
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-6">
 	            <pre class="responseLocalizedTable alert alert-secondary">
-	            	 Submit for Localized Strings 
+	            	 Submit for Localized Strings
 	    		</pre>
-            </div>
         </div>
+    </div>
 
-        <div class="row">
-            <br>
-        </div>
+    <div class="row">
+        <br>
+    </div>
 
-        <div class="row">
-            <div class="col col-lg-6">
-                Swift Code
-                <pre class="responseSwiftVM alert alert-secondary">
- Submit for class 
+    <div class="row">
+        <div class="col col-lg-6">
+            Swift Code
+            <pre class="responseSwiftVM alert alert-secondary">
+ Submit for class
 </pre>
-            </div>
-
         </div>
 
-        <div class="row">
-            <div class="col col-lg-6">
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-6">
                 <pre class="responseSwiftVC alert alert-secondary">
- Submit for class 
+ Submit for class
 </pre>
-            </div>
-
-            
         </div>
 
-        <div class="row">
-            <div class="col col-lg-6"></div>
 
-                   </div>
+    </div>
 
-        <div class="row">
-            <div class="col col-lg-6"></div>
+    <div class="row">
+        <div class="col col-lg-6"></div>
 
-                        </div>
-        </div>
-    </div><script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" type="text/javascript">
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous" type="text/javascript">
-</script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous" type="text/javascript">
-</script><script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js" crossorigin="anonymous" type="text/javascript">
-</script><script type="text/javascript">
-    
-        function jsUcfirst(string)
-        {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-          function jsLcfirst(string)
-        {
-            return string.charAt(0).toLowerCase() + string.slice(1);
-        }
-        
-        function createClass(jsonData) {
-			console.log(jsonData);
-			
-            
-            var ClassName = jsonData.name
-            var VCClassName = jsonData.name + "ViewController"
-            var VMClassName = jsonData.name + "ViewModel"
-            var dictionary = jsonData.data
+    </div>
 
-            var responseLocalized = ""
-            var responseLocalizedTable = ""
-            var fields  = ""
-            var views = ""
-            var binds = ""
-            var swiftBinds = ""
-            var adds = ""
-            var localizes = ""
-            var constrain = ""
-            var viewModelProperties = ""
-            var viewModelMethods = ""
-            var lastViewName = ""
-            var myDate = new Date()
-            var date = (myDate.getMonth() + 1) + "/" + myDate.getDate() + "/" + myDate.getFullYear()
+    <div class="row">
+        <div class="col col-lg-6"></div>
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"
+        type="text/javascript">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"
+        type="text/javascript">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"
+        type="text/javascript">
+</script>
+<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"
+        crossorigin="anonymous" type="text/javascript">
+</script>
+<script type="text/javascript">
+
+    function jsUcfirst(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function jsLcfirst(string) {
+        return string.charAt(0).toLowerCase() + string.slice(1);
+    }
+
+    function createClass(jsonData) {
+        console.log(jsonData);
+        var ClassName = jsonData.name
+        var VCClassName = jsonData.name + "ViewController";
+        var VClassName = jsonData.name + "View";
+        var VMClassName = jsonData.name + "ViewModel";
+        var dictionary = jsonData.data
+
+        var responseLocalized = ""
+        var responseLocalizedTable = ""
+        var fields = ""
+        var views = ""
+        var binds = ""
+        var swiftBinds = ""
+        var adds = ""
+        var localizes = ""
+        var constrain = ""
+        var viewModelProperties = ""
+        var viewModelInputProperties = ""
+        var viewModelOutputProperties = ""
+
+        var viewModelMethods = ""
+        var lastViewName = ""
+        var myDate = new Date()
+        var date = (myDate.getMonth() + 1) + "/" + myDate.getDate() + "/" + myDate.getFullYear()
 
 
-            let localizedName = jsLcfirst(jsonData.name) + "NavBarTitle"
-            localizes += "\ttitle = localized(."+localizedName+")\n"
-            responseLocalized = localizedName + "\n" + responseLocalized
-            responseLocalizedTable += "<tr><td>"+jsLcfirst(jsonData.name) +"<\/td><td>NavBarTitle<\/td><td>"+ jsonData.name +"<\/td><\/tr>\n"
+        let localizedName = jsLcfirst(jsonData.name) + "NavBarTitle"
+        localizes += "\ttitle = localized(." + localizedName + ")\n"
+        responseLocalized = localizedName + "\n" + responseLocalized
+        responseLocalizedTable += "<tr><td>" + jsLcfirst(jsonData.name) + "<\/td><td>NavBarTitle<\/td><td>" + jsonData.name + "<\/td><\/tr>\n"
 
 
-            dictionary.views.forEach(function(ele) {
-                var safeName = jsLcfirst(ele.name.replace(/ /g, ""));
-                var localized = jsonData.name.toLowerCase() + safeName+ "Placeholder";
-                localized = localized.replace(/ /g, "");
-                var viewName = ""
-                if (ele.type == "Label" ) {
-                    
-                    viewName = safeName +"Label"
-                    adds += "\tcontentView.addSubview(" + viewName + ")\n"
-                    views += "let "+ safeName +"Label = Label()\n"
-                    
-                    let localizedName = jsLcfirst(jsonData.name) + jsUcfirst(viewName) +"Text"
-                    localizes += "\t"+viewName+".text = localized(."+localizedName+")\n"
-                    responseLocalized = localizedName + "\n" + responseLocalized
-                    responseLocalizedTable += "<tr><td>"+jsLcfirst(jsonData.name) +"<\/td><td>"+ jsUcfirst(viewName) +"Text<\/td><td>"+ ele.text +"<\/td><\/tr>\n"
-                    
-                } else if (ele.type == "RxLabel" ) {
-                    
-                    var prop = `let `+ safeName +` = BehaviorSubject<String>(value: "")\n`;
-                    viewModelProperties += prop
-                    
-                    viewName = safeName +"Label"
-                    //viewName = safeName +"Label"
-                    adds += "\tcontentView.addSubview(" + viewName + ")\n"
-                    views += "\tlet "+ safeName +"Label = Label()\n"
-            
-                    swiftBinds += `\tviewModel.`+safeName+`
-      .bind(to: `+viewName +`.rx.text )
+        dictionary.views.forEach(function (ele) {
+            var safeName = jsLcfirst(ele.name.replace(/ /g, ""));
+            var localized = jsonData.name.toLowerCase() + safeName + "Placeholder";
+            localized = localized.replace(/ /g, "");
+            var viewName = ""
+            if (ele.type == "Label") {
+
+                viewModelOutputProperties += `\tlet ` + safeName + `: Observable<String?>\n`
+
+
+                viewName = safeName + "Label"
+                adds += "\tcontentView.addSubview(" + viewName + ")\n"
+                views += "let " + safeName + "Label = Label()\n"
+
+                let localizedName = jsLcfirst(jsonData.name) + jsUcfirst(viewName) + "Text"
+                localizes += "\t" + viewName + ".text = localized(." + localizedName + ")\n"
+                responseLocalized = localizedName + "\n" + responseLocalized
+                responseLocalizedTable += "<tr><td>" + jsLcfirst(jsonData.name) + "<\/td><td>" + jsUcfirst(viewName) + "Text<\/td><td>" + ele.text + "<\/td><\/tr>\n"
+
+            } else if (ele.type == "RxLabel") {
+
+                var prop = `let ` + safeName + ` = BehaviorSubject<String>(value: "")\n`;
+                viewModelProperties += prop
+
+                viewName = safeName + "Label"
+                //viewName = safeName +"Label"
+                adds += "\tcontentView.addSubview(" + viewName + ")\n"
+                views += "\tlet " + safeName + "Label = Label()\n"
+
+                swiftBinds += `\tviewModel.` + safeName + `
+      .bind(to: ` + viewName + `.rx.text )
       .disposed(by: disposeBag)\n`
-            
-                           
-                } else if (ele.type == "Button" ) {
-                                    
-                    viewModelMethods +=  `\tfunc `+ safeName +`Clicked() {  }\n\n`
 
-                    viewName = safeName +"Button"
-                    views += "\tlet "+ viewName +" = "+ ele.type+"()\n"
-                    adds += "contentView.addSubview(" + viewName + ")\n"
-                    swiftBinds += `\t`+viewName+`.rx.tap
+
+            } else if (ele.type == "Button") {
+
+
+                viewModelInputProperties += `\tlet ` + safeName + `: Observable<Void>\n`
+
+                viewName = safeName + "Button"
+                views += "\tlet " + viewName + " = " + ele.type + "()\n"
+                adds += "contentView.addSubview(" + viewName + ")\n"
+                swiftBinds += `\t` + viewName + `.rx.tap
             .subscribe(onNext: { [weak self] to in
                     guard let \`self\` = self else { return }
-                    self.viewModel.`+ safeName +`Clicked() 
+                    self.viewModel.` + safeName + `Clicked()
                 })
             .disposed(by: disposeBag)\n`
-                    
-                    let localizedName = jsLcfirst(jsonData.name) + jsUcfirst(viewName) +"Text"
-                    localizes += "\t"+viewName+".text = localized(."+localizedName+")\n"
-                    responseLocalized = localizedName +"\n" + responseLocalized
-                    responseLocalizedTable += "<tr><td>"+jsLcfirst(jsonData.name) +"<\/td><td>"+ jsUcfirst(viewName) +"Text<\/td><td>"+ ele.text +"<\/td><\/tr>\n"
 
-                    
-                } else if (ele.type == "TextField" ) {
-                    
-                    var prop = `\tlet `+ safeName +` = BehaviorSubject<String>(value: "")\n`;
-                    viewModelProperties += prop
+                let localizedName = jsLcfirst(jsonData.name) + jsUcfirst(viewName) + "Text"
+                localizes += "\t" + viewName + ".text = localized(." + localizedName + ")\n"
+                responseLocalized = localizedName + "\n" + responseLocalized
+                responseLocalizedTable += "<tr><td>" + jsLcfirst(jsonData.name) + "<\/td><td>" + jsUcfirst(viewName) + "Text<\/td><td>" + ele.text + "<\/td><\/tr>\n"
 
-                    viewName = safeName +"Field"
-                    views += "\tlet "+ viewName +" = "+ ele.type+"()\n"
-                    adds += "\tcontentView.addSubview(" + viewName + ")\n"
-                    swiftBinds += `\t`+viewName+`.rx.text
+
+            } else if (ele.type === "TextField") {
+
+                var prop = `\tlet ` + safeName + ` = BehaviorSubject<String>(value: "")\n`;
+                viewModelProperties += prop
+
+                viewModelInputProperties += `\tlet ` + safeName + `: Observable<String?>\n`
+
+                viewName = safeName + "Field"
+                views += "\tlet " + viewName + " = " + ele.type + "()\n"
+                adds += "\tcontentView.addSubview(" + viewName + ")\n"
+                swiftBinds += `\t` + viewName + `.rx.text
             .map { $0 ?? "" }
-            .bind(to: viewModel.`+safeName+` )
+            .bind(to: viewModel.` + safeName + ` )
             .disposed(by: disposeBag)\n`
-            
-                    let localizedName = jsLcfirst(jsonData.name) + jsUcfirst(viewName) +"PlaceHolder"
-                    localizes += "\t"+viewName+".placeholder = localized(."+localizedName+")\n"
-                    responseLocalized = localizedName +"\n" + responseLocalized
-                    responseLocalizedTable += "<tr><td>"+jsLcfirst(jsonData.name) +"<\/td><td>"+ jsUcfirst(viewName) +"PlaceHolder<\/td><td>"+ ele.text +"<\/td><\/tr>\n"
 
-                } else if (ele.type == "ImageView" )  {
-                    viewName = safeName +"ImageView"
-                    views += "\tlet "+ viewName +" = UIImageView()\n"
-                    adds += "\tcontentView.addSubview(" + viewName + ")\n"
-                } else {
-                    viewName = safeName +"View"
-                    views += "\tlet "+ viewName +" = "+ ele.type+"()\n"
-                    adds += "\tcontentView.addSubview(" + viewName + ")\n"
-                }
-                
-            if ( lastViewName == "" ){
-			    constrain += "\t"+ viewName+`.snp.makeConstraints { make in
-			    	make.top.equalToSuperview().offset(Dimension.defaultMargin)
-					make.leading.trailing.equalToSuperview().inset(Dimension.defaultMargin)
+                let localizedName = jsLcfirst(jsonData.name) + jsUcfirst(viewName) + "PlaceHolder"
+                localizes += "\t" + viewName + ".placeholder = localized(." + localizedName + ")\n"
+                responseLocalized = localizedName + "\n" + responseLocalized
+                responseLocalizedTable += "<tr><td>" + jsLcfirst(jsonData.name) + "<\/td><td>" + jsUcfirst(viewName) + "PlaceHolder<\/td><td>" + ele.text + "<\/td><\/tr>\n"
+
+            } else if (ele.type === "ImageView") {
+                viewModelOutputProperties += `\tlet ` + safeName + `: Observable<URL>\n`
+                viewName = safeName + "ImageView"
+                views += "\tlet " + viewName + " = UIImageView()\n"
+                adds += "\tcontentView.addSubview(" + viewName + ")\n"
+            } else {
+                viewModelOutputProperties += `\tlet ` + safeName + `: Observable<String>\n`
+
+                viewName = safeName + "View"
+                views += "\tlet " + viewName + " = " + ele.type + "()\n"
+                adds += "\tcontentView.addSubview(" + viewName + ")\n"
+            }
+
+            if (lastViewName === "") {
+                constrain += "\t" + viewName + `.snp.makeConstraints { make in
+			    	make.top.equalToSuperview().offset(Dimension.margin)
+					make.leading.trailing.equalToSuperview().inset(Dimension.margin)
 				}
 			    `
             } else {
-			    constrain += "\t"+ viewName+`.snp.makeConstraints { make in
-				   make.top.equalTo(self.`+ lastViewName +`.snp.bottom).offset(Dimension.defaultMargin)
-				   make.leading.trailing.equalToSuperview().inset(Dimension.defaultMargin)
+                constrain += "\t" + viewName + `.snp.makeConstraints { make in
+				   make.top.equalTo(self.` + lastViewName + `.snp.bottom).offset(Dimension.margin)
+				   make.leading.trailing.equalToSuperview().inset(Dimension.margin)
 				}
-			    `             
+			    `
             }
             lastViewName = viewName
-            })
-            
-        
-    fields = fields.substring(0, fields.length-2);
+        })
 
-    $(".responseLocalized").text(responseLocalized)       
-    $(".responseLocalizedTable").html("<table>"+responseLocalizedTable+"<\/table>")
 
-    var model = `
+        fields = fields.substring(0, fields.length - 2);
+
+        $(".responseLocalized").text(responseLocalized)
+        $(".responseLocalizedTable").html("<table>" + responseLocalizedTable + "<\/table>")
+
+        var model = `
 //
-//  `+VMClassName+`.swift
+//  ` + VMClassName + `.swift
 //  App
 //
-//  Created by Nicholas Trienens on `+date+`.
-//  Copyright © 2017 Generated. All rights reserved.
+//  Created by Nicholas Trienens on ` + date + `.
+//  Copyright © 2020 Generated. All rights reserved.
 //
 
 import UIKit
 import RxSwift
+import RxRelay
+import RxFuzz
 
-final class `+VMClassName+` {
-	
+class ` + VMClassName + `: OutputBuilder {
+
 enum NavigationEndpoint {
     case forwardchangeMe
     case back
@@ -299,287 +332,255 @@ enum NavigationEndpoint {
 
 // Default Variables
 let disposeBag = DisposeBag()
-let loadStatus = BehaviorSubject<LoadStatus>(value: .none)
-let isValid = BehaviorSubject<Bool>(value: false)
+let loadStatus = BehaviorRelay<LoadStatus>(value: .notStarted)
+let isValid = BehaviorRelay<Bool>(value: false)
 let navigateTo = PublishSubject<NavigationEndpoint>()
 
 // UIVariables
-`+ viewModelProperties +`
-    
-let client: Client
-init(with client: Client) {
-    self.client = client
+` + viewModelProperties + `
+
+init() {
+
 }
 
-`+viewModelMethods+`    
-
-
-// MARK: - RxBinder -
-extension `+VMClassName+`: RxBinder {
-    
-    func setupBindings() {
-	    
-	}
+struct Input {
+    ` + viewModelInputProperties + `
 }
-    `
-    $(".responseSwiftVM").text(model)
 
-   
+struct Output {
+    ` + viewModelOutputProperties + `
+}
 
-    var template = `
+` + viewModelMethods + `
+
+func buildOutput(_ input: Input) -> Output {
+  return Output()
+}
+
+}
+`
+
+        $(".responseSwiftVM").text(model)
+        var template = `
 //
 //  ` + VCClassName + `.swift
-//  MobilePanelApp
+//  App
 //
-//  Created by Nicholas Trienens on `+date+`.
-//  Copyright © 2017 SurveyMonkey. All rights reserved.
+//  Created by Nicholas Trienens on ` + date + `.
+//  Copyright © 2020 Generated. All rights reserved.
 //
 
 import Foundation
 import RxSwift
 import RxCocoa
 import SnapKit
+import RxFuzz
 
-class ` + VCClassName + `: ViewController {
+class ` + VCClassName + `: ViewController, ViewCustomizer {
 
     // MARK: - Properties -
-    let viewModel: `+ VMClassName +`
+    let viewModel = ` + VMClassName + `()
+    let content = ` + viewName + `()
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupBindings()
+        localize()
+      }
+
+    func addViews() {
+           view.addSubview(content)
+       }
+
+       func constrainViews() {
+           content.snp.makeConstraints { make in
+               make.leading.trailing.top.equalToSuperview()
+               make.bottom.equalToSuperview()
+           }
+       }
+
+       func styleViews() {
+           content.scrollView.contentInsetAdjustmentBehavior = .automatic
+        }
+
+        func setupBindings() {
+            let input = ` + VMClassName + `.Input()
+            let output = viewModel.buildOutput(input)
+        }
+
+        func localize() {
+            ` + localizes + `
+        }
+
+}
+
+class ` + VClassName + `: View {
     // UI Elements
     let scrollView = UIScrollView()
     let contentView = UIView()
 
-    `+views+`
+    ` + views + `
 
-    // MARK: - Initialization -
-    init(with client: Client) {
-        self.viewModel = `+ VMClassName +`(with: client)
-        super.init(nibName: nil, bundle: nil)
-    }
-     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }    
-}
 
-// MARK: - ViewCustomizer -
-extension ` + VCClassName + `: ViewCustomizer {
-    func addViews() {
-        view.addSubview(scrollView)
+    override func addViews() {
+        addSubview(scrollView)
         scrollView.addSubview(contentView)
-        
-    `+ adds +`
+
+    ` + adds + `
 
     }
 
-    func constrainViews() {
+    override func constrainViews() {
 
         scrollView.snp.remakeConstraints { make in
             make.top.equalToSuperview().inset(Dimension.scrollViewInsetHeight)
             make.bottom.trailing.left.equalToSuperview()
         }
-        
+
         contentView.snp.makeConstraints { make in
-            make.width.equalTo(view)
+            make.width.equalTo(self)
             make.height.greaterThanOrEqualTo(self.scrollView)
             make.edges.equalToSuperview()
         }
-    `+ constrain +`
-        
+    ` + constrain + `
+
     }
-        
-    func styleView() {
-        view.backgroundColor = .white
+
+    override func styleViews() {
+        backgroundColor = .white
     }
 }
 
-// MARK: - Localizer -
-extension ` + VCClassName + `: Localizer {
-    func localize() {
-        `+localizes+`
-    }
-}
-
-// MARK: - RxBinder -
-extension ` + VCClassName + `: RxBinder {
-    func setupBindings() {
-        bindLoadStatus(loadStatus: viewModel.loadStatus)
-        setupValidationBindings()
-        `+binds+`
-        `+swiftBinds+`
-    }
-    func setupValidationBindings() {
-        viewModel.isValid
-        	.asObservable()
-            .subscribe(
-            onNext: { [weak self] valid in
-                guard let \`self\` = self else { return }
-                if valid {
-                
-                } else {
-                
-                }
-            }
-            )
-            .disposed(by: disposeBag)
-    }
-}
-
-// MARK: - RxNavigationBinder -
-extension ` + VCClassName + `: RxNavigationBinder {
-    func setupNavigationBindings() {
-        viewModel.navigateTo
-            .subscribe(
-            	onNext: { [weak self] to in
-	                guard let \`self\` = self else { return }
-	
-	                switch to {
-	                case .forward:
-                        self.goto(ViewController(), presentationMode: presentation)	                    
-	                case .back:
-	                    self.exit()
-	                }
-				}
-            )
-            .disposed(by: disposeBag)
-    }
-}
-
-
-// MARK: - Interaction Responder -
-extension ` + VCClassName + `: InteractionResponder {
-    func addInteractionResponses() {
-        avoidKeyboardBoundsAdjusting(with: scrollView, disposeBag: disposeBag)
-    }
-}
     `
 
-    $(".responseSwiftVC").text(template)
-   
+        $(".responseSwiftVC").text(template)
 
-    return template
+
+        return template
     }
 
-    String.prototype.toSnake = function(){
-	    return this.replace(/([A-Z])/g, function($1){return "_"+$1.toLowerCase();});
+    String.prototype.toSnake = function () {
+        return this.replace(/([A-Z])/g, function ($1) {
+            return "_" + $1.toLowerCase();
+        });
     };
-        
-       $(document).ready(function() {
 
-	   		var loaded = false      
-            var retrievedObject = localStorage.getItem('pastClasses');
-            if (retrievedObject != undefined ){
-                var fullObject = JSON.parse(retrievedObject) 
-                var data = fullObject[fullObject.length -1]      
-                if (data != undefined && data["name"] != undefined){
-                                    
-                    console.log("set to last")
+    $(document).ready(function () {
 
-                    $(".fname").val(data["name"])
-					$(".scrolls").val(data["useScrollview"])
-                    $(".fdata").val(JSON.stringify(data["data"], undefined, 1))
-                    loaded = true      
+        var loaded = false
+        var retrievedObject = localStorage.getItem('pastClasses');
+        if (retrievedObject != undefined) {
+            var fullObject = JSON.parse(retrievedObject)
+            var data = fullObject[fullObject.length - 1]
+            if (data != undefined && data["name"] != undefined) {
 
-                }
-            }
-            
-            if (loaded) {
-                var fullObject = []
-                localStorage.setItem('pastClasses', JSON.stringify(fullObject));
-
-            }
-                    
-/*
-            var retrievedObject = localStorage.getItem('pastClasses');
-            if (retrievedObject != undefined ){
-                var fullObject = JSON.parse(retrievedObject) 
-                var data = fullObject[fullObject.length -1]      
-            
                 console.log("set to last")
+
                 $(".fname").val(data["name"])
-                $(".pname").val(data["package"])
+                $(".scrolls").val(data["useScrollview"])
                 $(".fdata").val(JSON.stringify(data["data"], undefined, 1))
-            } else {
-                var fullObject = []
-                localStorage.setItem('pastClasses', JSON.stringify(fullObject));
+                loaded = true
 
             }
-*/
+        }
 
-            function gather() {
-                var jsonData = {};
+        if (loaded) {
+            var fullObject = []
+            localStorage.setItem('pastClasses', JSON.stringify(fullObject));
 
-                console.log( $(".fdata").val() );
+        }
 
-                jsonData["name"] = $(".fname").val();
-                jsonData["useScrollview"] = $(".scrolls").val();
-                jsonData["data"] = JSON.parse($(".fdata").val());
+        /*
+                    var retrievedObject = localStorage.getItem('pastClasses');
+                    if (retrievedObject != undefined ){
+                        var fullObject = JSON.parse(retrievedObject)
+                        var data = fullObject[fullObject.length -1]
 
-                //var data = JSON.stringify(jsonData);
-                console.log( jsonData );
-                return jsonData;
+                        console.log("set to last")
+                        $(".fname").val(data["name"])
+                        $(".pname").val(data["package"])
+                        $(".fdata").val(JSON.stringify(data["data"], undefined, 1))
+                    } else {
+                        var fullObject = []
+                        localStorage.setItem('pastClasses', JSON.stringify(fullObject));
+
+                    }
+        */
+
+        function gather() {
+            var jsonData = {};
+
+            console.log($(".fdata").val());
+
+            jsonData["name"] = $(".fname").val();
+            jsonData["useScrollview"] = $(".scrolls").val();
+            jsonData["data"] = JSON.parse($(".fdata").val());
+
+            //var data = JSON.stringify(jsonData);
+            console.log(jsonData);
+            return jsonData;
+        }
+
+        $(".sendForm").click(function (event) {
+            event.preventDefault();
+            var jsonData = gather()
+            $(this).button('generating...')
+            createClass(jsonData);
+
+            var retrievedObject = localStorage.getItem('pastClasses');
+            var fullObject = JSON.parse(retrievedObject)
+            var type = typeof fullObject;
+            console.log(retrievedObject);
+            console.log(type)
+            if (type != "object" || retrievedObject == null) {
+                fullObject = []
             }
-                         
-            $(".sendForm").click(function(event) {
-                 event.preventDefault();
-                var jsonData = gather()
-                 $(this).button('generating...')
-                 createClass(jsonData);
+            console.log(fullObject);
 
-                var retrievedObject = localStorage.getItem('pastClasses');
-                var fullObject = JSON.parse(retrievedObject)
-                var type = typeof fullObject;
-                console.log( retrievedObject);
-                console.log(type)
-                if  ( type != "object" || retrievedObject == null) {
-                    fullObject = []
-                }
-                console.log( fullObject);
-
-                fullObject.push(jsonData)
-                // Put the object into storage
-                localStorage.setItem('pastClasses', JSON.stringify(fullObject));
+            fullObject.push(jsonData)
+            // Put the object into storage
+            localStorage.setItem('pastClasses', JSON.stringify(fullObject));
 
 
+            $(".sendForm").button('reset');
+        })
 
-                $(".sendForm").button('reset');
-            })
-            
-            $(".downloadFilesSwift").click(function(event) {
-                event.preventDefault();
-                $(this).button('generating...')
-                                
-                                
-                var jsonData = gather()
-                createClass(jsonData)
+        $(".downloadFilesSwift").click(function (event) {
+            event.preventDefault();
+            $(this).button('generating...')
 
-                var VCClassName = jsonData.name + "ViewController"
-                var VMClassName = jsonData.name + "ViewModel"                
-                                
-                var blob = new Blob([$(".responseSwiftVM").text()], {type: "text/plain;charset=utf-8"});
-                saveAs(blob, VMClassName+".swift");
 
-                var blob = new Blob([$(".responseSwiftVC").text()], {type: "text/plain;charset=utf-8"});
-                saveAs(blob, VCClassName+".swift");
-                                
-                $(".downloadFiles").button('reset');
-                
-                var retrievedObject = localStorage.getItem('pastClasses');
-                var fullObject = JSON.parse(retrievedObject)
-                var type = typeof fullObject;
-                console.log(type)
-                if  ( type != "object" ) {
-                    fullObject = []
-                }
-                fullObject.push(jsonData)
-                // Put the object into storage
-                localStorage.setItem('pastClasses', JSON.stringify(fullObject));
+            var jsonData = gather()
+            createClass(jsonData)
 
-                // Retrieve the object from storage
-                var retrievedObject = localStorage.getItem('pastClasses');
-                console.log('retrievedObject: ', JSON.parse(retrievedObject));
-                
-            })
-         });        
-    </script>
+            var VCClassName = jsonData.name + "ViewController"
+            var VMClassName = jsonData.name + "ViewModel"
+
+            var blob = new Blob([$(".responseSwiftVM").text()], {type: "text/plain;charset=utf-8"});
+            saveAs(blob, VMClassName + ".swift");
+
+            var blob = new Blob([$(".responseSwiftVC").text()], {type: "text/plain;charset=utf-8"});
+            saveAs(blob, VCClassName + ".swift");
+
+            $(".downloadFiles").button('reset');
+
+            var retrievedObject = localStorage.getItem('pastClasses');
+            var fullObject = JSON.parse(retrievedObject)
+            var type = typeof fullObject;
+            console.log(type)
+            if (type != "object") {
+                fullObject = []
+            }
+            fullObject.push(jsonData)
+            // Put the object into storage
+            localStorage.setItem('pastClasses', JSON.stringify(fullObject));
+
+            // Retrieve the object from storage
+            var retrievedObject = localStorage.getItem('pastClasses');
+            console.log('retrievedObject: ', JSON.parse(retrievedObject));
+
+        })
+    });
+</script>
 </body>
 </html>

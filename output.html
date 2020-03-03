@@ -19,21 +19,32 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	         <div class="my-2 my-lg-0 mr-sm-2">
-                <a class=" btn btn-sm" href="index.html">MVVM</a>
+                <a class=" btn btn-sm" href="./index.html">MVVM</a>
             </div>
 	         <div class="my-2 my-lg-0 mr-sm-2">
-			 	<a class="btn btn-sm" href="models.html">Models</a>
+			 	<a class="btn btn-sm" href="./model.html">Models</a>
 			 </div>
 			<div class="my-2 my-lg-0 mr-sm-2">
-                <a class="nav-link" href="output.html">Output</a>
+                <a class="nav-link" href="./output.html">Output</a>
             </div>
 
         </div>
     </nav>
-    
+
     <div class="container-fluid" style="margin:25px;">
         <div class="row">
-            <h1>Model</h1>
+            <h1>To Output converter</h1>
+          </div>
+            <div class="row"><br/>
+          <pre>/// Conformance to this Protocol is a signal to the developer
+/// that this ViewModel uses Input/Output types for bindings and
+/// output is built Via a `buildOutput` method which takes interaction arguments
+public protocol OutputBuilder {
+    associatedtype Input
+    associatedtype Output
+    func buildOutput(_ input: Input) -> Output
+}
+</pre>
         </div>
 
         <form class="form ajaxForm" action="/" method="get">
@@ -43,14 +54,7 @@
                     <input name="fname" rows="5" cols="50" class="fname" id="fname" value="Data">
                 </div>
             </div>
-            
-<!--
-            <div class="form-group hide hidden">
-                <label for="Decoding">Advanced Decoding?</label>
-                <input type="checkbox" name="Decoding" class="Decoding" id="Decoding" value="1" >
-            </div>
--->
-            
+
             <div class="row">
                 <div class="col col-lg-8 form-group">
                     <label for="fdata">Paste current ViewModel Streams</label><br>
@@ -60,7 +64,7 @@
 	let description = ReplaySubject<String>.create()
 	let calories = ReplaySubject<String>.create()
 	let priceString = ReplaySubject<String>.create()
-	let allergens = ReplaySubject<String>.create()   
+	let allergens = ReplaySubject<String>.create()
 	    private let viewStyle = BehaviorSubject<ProductOptionCell.ViewStyle>(value: [])
 
 </textarea>
@@ -68,7 +72,8 @@
             </div>
 
             <div class="row">
-                <input class="btn btn-primary sendForm" type="submit" value="Submit" autocomplete="off"> &nbsp;&nbsp;&nbsp; <input class="btn btn-primary downloadFiles" type="submit" value="Download" autocomplete="off">&nbsp;&nbsp;&nbsp;
+                <input class="btn btn-primary sendForm" type="submit" value="Submit" autocomplete="off"> &nbsp;&nbsp;&nbsp;
+                <!-- <input class="btn btn-primary downloadFiles" type="submit" value="Download" autocomplete="off">&nbsp;&nbsp;&nbsp; -->
             </div>
         </form>
 
@@ -86,7 +91,7 @@
             <div class="col col-lg-8">
                 Swift ViewModel
                 <pre class="responseSwiftM alert alert-secondary">
- Submit for class 
+ Submit for class
 </pre>
             </div>
 
@@ -96,7 +101,7 @@
 </script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous" type="text/javascript">
 </script><script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js" crossorigin="anonymous" type="text/javascript">
 </script><script type="text/javascript">
-    
+
         function jsUcfirst(string)
         {
             return string.charAt(0).toUpperCase() + string.slice(1);
@@ -105,12 +110,12 @@
         {
             return string.charAt(0).toLowerCase() + string.slice(1);
         }
-        
+
         String.prototype.toSnake = function(){
 	    	return this.replace(/([A-Z])/g, function($1){return "_"+$1.toLowerCase(); });
     	};
-         
-        
+
+
         function camelize(str) {
             str = str.replace(/_/g, " ")
             str = str.replace(/-/g, " ")
@@ -120,43 +125,41 @@
         }
 
 
-        
+
         function createClass(jsonData) {
 
             var ClassName = "Output";
             var Model = "";
             var Builder = `
-    
-//ViewModel extension            
-            
+
+//ViewModel extension
+
             // MARK: - OutputBuilder -
 extension `+jsonData.name+`: OutputBuilder {
-    typealias I = Input
-    typealias O = Output
-    
+
     struct Input {
         let viewWillAppear: Observable<Void>
     }
 
-    func buildOutput(_ input: I) -> O {
-	    
+    func buildOutput(_ input: Input) -> Output {
+
 	 input.viewWillAppear
             .subscribe(onNext: { [weak self] in self?.logScreenView() })
             .disposed(by: disposeBag)
-	
+
 `
 
 			var builderLocals = ""
 			var builderCreate = "\treturn Output("
-            
+
             console.log(jsonData.body)
-			
+
 			var nameRE = /let (.*?)\s?[=:]/;
 			var typeRE = /<(.*)>/;
-			
+
 			var lines = jsonData.body.split("\n")
 			lines.forEach(function(element) {
-				
+
 				var found = element.match(nameRE);
 				console.log(found);
 				if (found !== null && found.length == 2) {
@@ -165,11 +168,11 @@ extension `+jsonData.name+`: OutputBuilder {
 					console.log(foundType);
 					if (foundType !== null && foundType.length == 2) {
 						var type = foundType[1]
-						
+
 						builderLocals += "\tlet " + name + "Observable: Observable<"+ type + "> \n";
-						
+
 						Model += "\t\tlet " + name+ ": Observable<"+ type + "> \n";
-						builderCreate += name+": "+ name + "Observable,\n\t\t" 
+						builderCreate += name+": "+ name + "Observable,\n\t\t"
 					} else {
 					    console.log("Name found but not type: " + name)
 					}
@@ -178,41 +181,41 @@ extension `+jsonData.name+`: OutputBuilder {
             builderCreate = builderCreate.substring(0, builderCreate.length-4) + " ) \n\t}\n}";
 
        builderCreate += `
-       
-       
-//TypeAilais for the ViewController            
+
+
+//TypeAilais for the ViewController
     typealias Output = `+jsonData.name+`.Output
     typealias Input = `+jsonData.name+`.Input
-            
-      
+
+
     let input =  Input(viewWillAppear: rx.viewWillAppear.map { _ in } )
     let output = viewModel.buildOutput(input)
-      
+
         `;
 
 			$(".responseSwiftM").text("// MARK: - output -\nstruct Output {\n"+ Model +"}\n\n" + Builder + builderLocals +  builderCreate);
 
-		}        
-        
-        
+		}
+
+
     const localStorageName =  'OutputModelSwag';
-        
+
    $(document).ready(function() {
-        var loaded = false      
+        var loaded = false
 		var retrievedObject = localStorage.getItem(localStorageName);
         console.log(retrievedObject)
         if (retrievedObject != undefined ){
-            var fullObject = JSON.parse(retrievedObject) 
-            var data = fullObject[fullObject.length -1]      
+            var fullObject = JSON.parse(retrievedObject)
+            var data = fullObject[fullObject.length -1]
             if (data != undefined ){
-                                
+
                 console.log("set to last")
 
                 $(".fname").val(data["name"])
 				$(".Decoding").val(data["advancedDecoding"])
                 $(".fdata").val(data["body"])
 
-                loaded = true      
+                loaded = true
 
             }
         }
@@ -225,7 +228,7 @@ extension `+jsonData.name+`: OutputBuilder {
             jsonData["name"] = $(".fname").val();
             jsonData["body"] = $(".fdata").val();
             jsonData["advancedDecoding"] = $(".Decoding").val();
-            
+
 			var retrievedObject = localStorage.getItem(localStorageName);
             if (retrievedObject != undefined ) {
                 var fullObject = JSON.parse(retrievedObject)
@@ -240,10 +243,10 @@ extension `+jsonData.name+`: OutputBuilder {
 
             // Retrieve the object from storage
             var retrievedObject = localStorage.getItem(localStorageName);
-            
+
             return jsonData;
         }
-                     
+
         $(".sendForm").click(function(event) {
              event.preventDefault();
             var jsonData = gather()
@@ -252,26 +255,26 @@ extension `+jsonData.name+`: OutputBuilder {
 
             $(".sendForm").button('reset');
         })
-        
+
         $(".downloadFiles").click(function(event) {
             event.preventDefault();
             $(this).button('generating...')
-                                  
+
             var jsonData = gather()
             createClass(jsonData)
 
-            var ClassName = jsonData.name                
-                            
+            var ClassName = jsonData.name
+
             var blob = new Blob([$(".responseSwiftM").text()], {type: "text/plain;charset=utf-8"});
             saveAs(blob, ClassName+".swift");
-                                            
+
             $(".downloadFiles").button('reset');
-            
+
         })
-               
+
      });
-     
-        
+
+
     </script>
 </body>
 </html>
