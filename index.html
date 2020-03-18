@@ -49,8 +49,8 @@
 
 
         <div class="form-group hide hidden">
-            <label for="scrolls">ScrollView?</label>
-            <input type="checkbox" name="scrolls" rows="5" cols="50" class="scrolls" id="hasVerticalScroll" value="1">
+            <label for="scrolls">StackView?</label>
+            <input type="checkbox" id="scrolls" name="scrolls" rows="5" cols="50" class="scrolls" value="1">
         </div>
 
 
@@ -172,6 +172,8 @@
         var VCClassName = jsonData.name + "ViewController";
         var VClassName = jsonData.name + "View";
         var VMClassName = jsonData.name + "ViewModel";
+        var useStackView =  jsonData.useStackview;
+
         var dictionary = jsonData.data
 
         var responseLocalized = ""
@@ -180,6 +182,7 @@
         var views = ""
         var binds = ""
         var swiftBinds = ""
+        var outputBinds = ""
         var adds = ""
         var localizes = ""
         var constrain = ""
@@ -192,6 +195,7 @@
         var myDate = new Date()
         var date = (myDate.getMonth() + 1) + "/" + myDate.getDate() + "/" + myDate.getFullYear()
 
+        var viewModelOutputConstructor  = "Output("
 
         let localizedName = jsLcfirst(jsonData.name) + "NavBarTitle"
         localizes += "\ttitle = localized(." + localizedName + ")\n"
@@ -204,13 +208,11 @@
             var localized = jsonData.name.toLowerCase() + safeName + "Placeholder";
             localized = localized.replace(/ /g, "");
             var viewName = ""
-            if (ele.type == "Label") {
+            if (ele.type === "Label") {
 
                 viewModelOutputProperties += `\tlet ` + safeName + `: Observable<String?>\n`
-
-
                 viewName = safeName + "Label"
-                adds += "\tcontentView.addSubview(" + viewName + ")\n"
+                //adds += "\tcontentView.addSubview(" + viewName + ")\n"
                 views += "let " + safeName + "Label = Label()\n"
 
                 let localizedName = jsLcfirst(jsonData.name) + jsUcfirst(viewName) + "Text"
@@ -218,29 +220,30 @@
                 responseLocalized = localizedName + "\n" + responseLocalized
                 responseLocalizedTable += "<tr><td>" + jsLcfirst(jsonData.name) + "<\/td><td>" + jsUcfirst(viewName) + "Text<\/td><td>" + ele.text + "<\/td><\/tr>\n"
 
-            } else if (ele.type == "RxLabel") {
+            } else if (ele.type === "RxLabel") {
 
                 var prop = `let ` + safeName + ` = BehaviorSubject<String>(value: "")\n`;
                 viewModelProperties += prop
 
                 viewName = safeName + "Label"
                 //viewName = safeName +"Label"
-                adds += "\tcontentView.addSubview(" + viewName + ")\n"
+                //adds += "\tcontentView.addSubview(" + viewName + ")\n"
                 views += "\tlet " + safeName + "Label = Label()\n"
 
                 swiftBinds += `\tviewModel.` + safeName + `
       .bind(to: ` + viewName + `.rx.text )
       .disposed(by: disposeBag)\n`
 
+                outputBinds += `\toutput.safeName
+                                    .bind(to: content.`+ viewName +`.rx.text)
+                                    .disposed(by: disposeBag)\n`
 
-            } else if (ele.type == "Button") {
-
+            } else if (ele.type === "Button") {
 
                 viewModelInputProperties += `\tlet ` + safeName + `: Observable<Void>\n`
 
                 viewName = safeName + "Button"
                 views += "\tlet " + viewName + " = " + ele.type + "()\n"
-                adds += "contentView.addSubview(" + viewName + ")\n"
                 swiftBinds += `\t` + viewName + `.rx.tap
             .subscribe(onNext: { [weak self] to in
                     guard let \`self\` = self else { return }
@@ -255,15 +258,13 @@
 
 
             } else if (ele.type === "TextField") {
-
-                var prop = `\tlet ` + safeName + ` = BehaviorSubject<String>(value: "")\n`;
-                viewModelProperties += prop
+                var prop = `\tlet ` + safeName + ` = BehaviorRelay<String>(value: "")\n`;
+                viewModelProperties += prop;
 
                 viewModelInputProperties += `\tlet ` + safeName + `: Observable<String?>\n`
 
                 viewName = safeName + "Field"
                 views += "\tlet " + viewName + " = " + ele.type + "()\n"
-                adds += "\tcontentView.addSubview(" + viewName + ")\n"
                 swiftBinds += `\t` + viewName + `.rx.text
             .map { $0 ?? "" }
             .bind(to: viewModel.` + safeName + ` )
@@ -276,14 +277,25 @@
 
             } else if (ele.type === "ImageView") {
                 viewModelOutputProperties += `\tlet ` + safeName + `: Observable<URL>\n`
+                viewModelOutputConstructor += safeName + `: .never(), `
                 viewName = safeName + "ImageView"
                 views += "\tlet " + viewName + " = UIImageView()\n"
-                adds += "\tcontentView.addSubview(" + viewName + ")\n"
+
+
             } else {
                 viewModelOutputProperties += `\tlet ` + safeName + `: Observable<String>\n`
+                viewModelOutputConstructor += safeName + `: .never(), `
 
                 viewName = safeName + "View"
                 views += "\tlet " + viewName + " = " + ele.type + "()\n"
+                outputBinds += `\toutput.`+safeName+`
+                                    .bind(to: content.`+ viewName +`.value)
+                                    .disposed(by: disposeBag)\n`
+
+            }
+            if (useStackView){
+                adds += "\tcontentView.addArrangedSubview(" + viewName + ")\n"
+            }else {
                 adds += "\tcontentView.addSubview(" + viewName + ")\n"
             }
 
@@ -305,12 +317,12 @@
 
 
         fields = fields.substring(0, fields.length - 2);
+        viewModelOutputConstructor = viewModelOutputConstructor.substring(0, viewModelOutputConstructor.length - 2);
 
         $(".responseLocalized").text(responseLocalized)
         $(".responseLocalizedTable").html("<table>" + responseLocalizedTable + "<\/table>")
 
-        var model = `
-//
+        var model = `//
 //  ` + VMClassName + `.swift
 //  App
 //
@@ -354,15 +366,20 @@ struct Output {
 ` + viewModelMethods + `
 
 func buildOutput(_ input: Input) -> Output {
-  return Output()
+  return `+viewModelOutputConstructor+`
 }
 
 }
 `
 
+        let contentView =  "\tlet contentView = UIView()\n"
+
+        if (useStackView){
+            contentView = "\tlet contentView = UIStackView()\n"
+        }
+
         $(".responseSwiftVM").text(model)
-        var template = `
-//
+        var template = `//
 //  ` + VCClassName + `.swift
 //  App
 //
@@ -380,7 +397,7 @@ class ` + VCClassName + `: ViewController, ViewCustomizer {
 
     // MARK: - Properties -
     let viewModel = ` + VMClassName + `()
-    let content = ` + viewName + `()
+    let content = ` + VClassName + `()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -406,6 +423,7 @@ class ` + VCClassName + `: ViewController, ViewCustomizer {
         func setupBindings() {
             let input = ` + VMClassName + `.Input()
             let output = viewModel.buildOutput(input)
+            ` + outputBinds + `
         }
 
         func localize() {
@@ -414,11 +432,12 @@ class ` + VCClassName + `: ViewController, ViewCustomizer {
 
 }
 
+
+
 class ` + VClassName + `: View {
     // UI Elements
     let scrollView = UIScrollView()
-    let contentView = UIView()
-
+    `+contentView+`
     ` + views + `
 
 
@@ -442,12 +461,12 @@ class ` + VClassName + `: View {
             make.height.greaterThanOrEqualTo(self.scrollView)
             make.edges.equalToSuperview()
         }
-    ` + constrain + `
+    ` + (useStackView ? "" : constrain) + `
 
     }
 
     override func styleViews() {
-        backgroundColor = .white
+        backgroundColor = Style.colors.white
     }
 }
 
@@ -513,7 +532,7 @@ class ` + VClassName + `: View {
             console.log($(".fdata").val());
 
             jsonData["name"] = $(".fname").val();
-            jsonData["useScrollview"] = $(".scrolls").val();
+            jsonData["useStackview"] = $(".scrolls").is(":checked");
             jsonData["data"] = JSON.parse($(".fdata").val());
 
             //var data = JSON.stringify(jsonData);
@@ -547,36 +566,36 @@ class ` + VClassName + `: View {
 
         $(".downloadFilesSwift").click(function (event) {
             event.preventDefault();
-            $(this).button('generating...')
+            $(this).button('generating...');
 
 
-            var jsonData = gather()
-            createClass(jsonData)
+            var jsonData = gather();
+            createClass(jsonData);
 
-            var VCClassName = jsonData.name + "ViewController"
-            var VMClassName = jsonData.name + "ViewModel"
+            var VCClassName = jsonData.name + "ViewController";
+            var VMClassName = jsonData.name + "ViewModel";
 
             var blob = new Blob([$(".responseSwiftVM").text()], {type: "text/plain;charset=utf-8"});
             saveAs(blob, VMClassName + ".swift");
 
-            var blob = new Blob([$(".responseSwiftVC").text()], {type: "text/plain;charset=utf-8"});
+            blob = new Blob([$(".responseSwiftVC").text()], {type: "text/plain;charset=utf-8"});
             saveAs(blob, VCClassName + ".swift");
 
             $(".downloadFiles").button('reset');
 
             var retrievedObject = localStorage.getItem('pastClasses');
-            var fullObject = JSON.parse(retrievedObject)
+            var fullObject = JSON.parse(retrievedObject);
             var type = typeof fullObject;
-            console.log(type)
+            console.log(type);
             if (type != "object") {
                 fullObject = []
             }
-            fullObject.push(jsonData)
+            fullObject.push(jsonData);
             // Put the object into storage
             localStorage.setItem('pastClasses', JSON.stringify(fullObject));
 
             // Retrieve the object from storage
-            var retrievedObject = localStorage.getItem('pastClasses');
+            retrievedObject = localStorage.getItem('pastClasses');
             console.log('retrievedObject: ', JSON.parse(retrievedObject));
 
         })

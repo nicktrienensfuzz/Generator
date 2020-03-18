@@ -7,317 +7,313 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Model</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"
+          type="text/css">
     <script src="https://apis.google.com/js/platform.js" async="" defer type="text/javascript">
-</script>
-    <meta name="google-signin-client_id" content="809696316591-714vqf1p7qkutiqnr0p8clddau8422to.apps.googleusercontent.com">
+    </script>
+    <meta name="google-signin-client_id"
+          content="809696316591-714vqf1p7qkutiqnr0p8clddau8422to.apps.googleusercontent.com">
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1">Swift Generator</span>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Swift Generator</span>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	         <div class="my-2 my-lg-0 mr-sm-2">
-                <a class="btn btn-sm" href="index.html">MVVM</a>
-            </div>
-	         <div class="my-2 my-lg-0 mr-sm-2">
-			 	<a class="nav-link" href="model.html">Models</a>
-			 </div>
-		   <div class="my-2 my-lg-0 mr-sm-2">
-                <a class="btn btn-sm" href="output.html">Output</a>
-            </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="my-2 my-lg-0 mr-sm-2">
+            <a class="btn btn-sm" href="index.html">MVVM</a>
         </div>
-    </nav>
+        <div class="my-2 my-lg-0 mr-sm-2">
+            <a class="nav-link" href="model.html">Models</a>
+        </div>
+        <div class="my-2 my-lg-0 mr-sm-2">
+            <a class="btn btn-sm" href="output.html">Output</a>
+        </div>
+    </div>
+</nav>
 
-    <div class="container-fluid" style="margin:25px;">
+<div class="container-fluid" style="margin:25px;">
+    <div class="row">
+        <h1>Model</h1>
+    </div>
+
+    <form class="form ajaxForm" action="/" method="get">
+
+        <div class="form-group">
+            <label for="fname">Class Name</label><br>
+            <input name="fname" rows="5" cols="50" class="fname" id="fname" value="Data">
+        </div>
+
+        <div class="form-group hide hidden">
+            <label for="Decoding">Advanced Decoding?</label>
+            <input type="checkbox" name="Decoding" class="Decoding" id="Decoding" value="1">
+        </div>
+
         <div class="row">
-            <h1>Model</h1>
-        </div>
-
-        <form class="form ajaxForm" action="/" method="get">
-
-                <div class="form-group">
-                    <label for="fname">Class Name</label><br>
-                    <input name="fname" rows="5" cols="50" class="fname" id="fname" value="Data">
-                </div>
-
-            <div class="form-group hide hidden">
-                <label for="Decoding">Advanced Decoding?</label>
-                <input type="checkbox" name="Decoding" class="Decoding" id="Decoding" value="1" >
-            </div>
-
-            <div class="row">
-                <div class="col col-lg-8 form-group">
-                    <label for="fdata">Swagger Json Schema, or swift type notation</label><br>
-                    <textarea rows="15" cols="90" name="fdata" id="fdata" class="fdata form-control">
+            <div class="col col-lg-8 form-group">
+                <label for="fdata">Swagger Json Schema, or swift type notation</label><br>
+                <textarea rows="15" cols="90" name="fdata" id="fdata" class="fdata form-control">
 
         let title: string
 var      subtitle: string
 
 </textarea>
-                </div>
             </div>
-
-            <div class="rowasdf">
-                <input class="btn btn-primary sendForm" type="submit" value="Submit" autocomplete="off"> &nbsp;&nbsp;&nbsp; <input class="btn btn-primary downloadFiles" type="submit" value="Download" autocomplete="off">&nbsp;&nbsp;&nbsp;
-            </div>
-        </form>
-
-        <div class="row">
-            <br>
         </div>
 
-        <div class="row">
-            <div class="col col-lg-8">
-                Swift ViewModel
-                <pre class="responseSwiftM alert alert-secondary">
+        <div class="rowasdf">
+            <input class="btn btn-primary sendForm" type="submit" value="Submit" autocomplete="off"> &nbsp;&nbsp;&nbsp;
+            <input class="btn btn-primary downloadFiles" type="submit" value="Download" autocomplete="off">&nbsp;&nbsp;&nbsp;
+        </div>
+    </form>
+
+    <div class="row">
+        <br>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-8">
+            Swift ViewModel
+            <pre class="responseSwiftM alert alert-secondary">
  Submit for class
 </pre>
-            </div>
+        </div>
 
-                  </div>
-    </div><script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" type="text/javascript">
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous" type="text/javascript">
-</script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous" type="text/javascript">
-</script><script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js" crossorigin="anonymous" type="text/javascript">
-</script><script type="text/javascript">
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"
+        type="text/javascript">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"
+        type="text/javascript">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"
+        type="text/javascript">
+</script>
+<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"
+        crossorigin="anonymous" type="text/javascript">
+</script>
+<script type="text/javascript">
 
-        function jsUcfirst(string)
-        {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-          function jsLcfirst(string)
-        {
-            return string.charAt(0).toLowerCase() + string.slice(1);
-        }
-        function camelize(str) {
-            str = str.replace(/_/g, " ")
-            str = str.replace(/-/g, " ")
-          return str.replace(/(?:^\w|[A-Z]|\b\w|_)/g, function(letter, index) {
+    function jsUcfirst(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function jsLcfirst(string) {
+        return string.charAt(0).toLowerCase() + string.slice(1);
+    }
+
+    function camelize(str) {
+        str = str.replace(/_/g, " ")
+        str = str.replace(/-/g, " ")
+        return str.replace(/(?:^\w|[A-Z]|\b\w|_)/g, function (letter, index) {
             return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
-          }).replace(/\s+/g, '');
+        }).replace(/\s+/g, '');
+    }
+
+    function createClass(jsonData) {
+
+        var ClassName = jsonData.name
+        var schema = jsonData.data
+        var advancedDecoding = jsonData.advancedDecoding;
+        console.log(schema)
+        var properties = [];
+        let lines = schema.split("\n")
+        console.log(lines);
+        for (var index in lines) {
+            let line = lines[index]
+           let  field = line.trim()
+            if (field.length < 3) {
+                continue;
+            }
+            let result = field.match(/(var)|(let)/);
+            if (result !== undefined && result !== null && result.length > 0) {
+                field = field.replace(/(var)|(let)/, "").trim()
+            }
+            console.log(field);
+            result = field.match(/(.*):(.*)/);
+            if (result !== undefined && result !== null && result.length > 0) {
+                console.log(result[1]);
+                console.log(result[2]);
+                properties.push({orig: line, name: result[1].trim(), type: result[2].trim()})
+            }
         }
-        function createClass(jsonData) {
+        console.log(properties);
 
-            var ClassName = jsonData.name
-            var schema = jsonData.data
-            console.log(schema)
-            var properties = [];
-            let lines = schema.split("\n")
-            console.log(lines);
-            for ( var index in lines) {
-                let field = lines[index]
-                field = field.trim()
-                if (field.length < 3 ){
-                  continue;
-                }
-                let result = field.match(/(var)|(let)/);
-                if (result !== undefined && result !== null && result.length > 0 ){
-                  field = field.replace( /(var)|(let)/, "" ).trim()
-                }
-                console.log(field);
-                properties.push(field)
+        var swiftViewModelProperties = ""
+        var swiftModelEquatableProperties = ""
+        var swiftModelHashableProperties = ""
+        var swiftInit = "init("
+
+        var swiftViewModelMethods = ""
+        var swiftViewModelPropertiesCoding = ""
+        var swiftDecoding = ""
+
+        var lastViewName = ""
+        var swiftEnums = ""
+
+        var myDate = new Date()
+        var date = (myDate.getMonth() + 1) + "/" + myDate.getDate() + "/" + myDate.getFullYear()
+
+
+        for (var index in properties) {
+            var field = properties[index];
+            var type = field['type'];
+
+            var fieldName = jsLcfirst(camelize(field.name));
+            var isRequired = !type.includes("?")
+            var seperator = " ";
+
+            type = jsUcfirst(type)
+
+            if (isRequired == false) {
+                swiftInit += "" + fieldName + `: ` + type + " = nil," + seperator
+            } else {
+                swiftInit += "" + fieldName + `: ` + type + "," + seperator
             }
-            console.log(properties)
+        }
 
-            var swiftViewModelProperties = ""
-            var swiftModelEquatableProperties = ""
-            var swiftModelHashableProperties = ""
-			         var swiftInit = "init("
+        swiftInit = swiftInit.substring(0, swiftInit.length - 2);
+        swiftInit += " ) {\n";
 
-            var swiftViewModelMethods = ""
-            var swiftViewModelPropertiesCoding = ""
-            var swiftDecoding = ""
+        for (var index in properties) {
+            var field = properties[index];
+            var jsonFieldName = field.name;
+            var type = field.type;
 
-            var lastViewName = ""
-            var swiftEnums = ""
+            var fieldName = jsonFieldName;
+            console.log(fieldName);
+            var type = field.type;
 
-            var myDate = new Date()
-            var date = (myDate.getMonth() + 1) + "/" + myDate.getDate() + "/" + myDate.getFullYear()
+            var isRequired = !type.includes("?");
+            swiftInit += "\tself." + fieldName + " = " + fieldName + "\n";
 
-            var required = []
-            if (dictionary.hasOwnProperty("required")) {
-                required = dictionary.required
-            }
-            console.log(dictionary.properties);
-            for ( var field in dictionary.properties) {
-	            var def = dictionary.properties[field]
-				          var type = def['type']
+            var cleanType = type.replace("?", "");
 
-                var fieldName = jsLcfirst(camelize(field))
-                var isRequired = required.includes(field)
-
-                var seperator =  " ";
-                if (Object.keys(dictionary.properties).length > 3) {
-					seperator = "\n\t";
-                }
-                console.log(Object.keys(dictionary.properties).length)
-
-                if (type == "integer") {
-                    type = "Int"
-                } else if (type == "boolean") {
-                    type = "Bool"
-                } else if (type == "object") {
-                    type = "[String: Bool]"
-                } else {
-                    type = jsUcfirst(type)
+            if (isRequired) {
+                var fallback = null;
+                if (type === "Int" ){
+                    fallback = "String"
                 }
 
-				if (isRequired == false){
-                    type += "?"
-                    swiftInit += "" + fieldName +`: `+ type +" = nil,"+seperator
-                } else {
-	                swiftInit += "" + fieldName +`: `+ type + ","+ seperator
-                }
-	        }
-			if (Object.keys(dictionary.properties).length > 3) {
-		        swiftInit = swiftInit.substring(0, swiftInit.length-3);
-	        } else {
-		        swiftInit = swiftInit.substring(0, swiftInit.length-2);
-	        }
-			swiftInit += " ) {\n";
+                if (advancedDecoding) {
+                    swiftDecoding += `\tdo {\n`;
+                    swiftDecoding += `\t\t` + fieldName + ` = try values.decode(` + cleanType + `.self, forKey: .` + fieldName + `)\n`;
+                    swiftDecoding += `\t} catch {\n`;
 
-            for ( var field in dictionary.properties) {
-                var def = dictionary.properties[field]
-                var jsonFieldName = field
-
-                var fieldName = jsLcfirst(camelize(field))
-                console.log(fieldName)
-                var type = def['type']
-
-                var isRequired = required.includes(field)
-                swiftInit += "\tself."+fieldName+" = "+ fieldName + "\n";
-
-                if ( def.hasOwnProperty("enum")) {
-                    var enumValues = def["enum"]
-                    type = jsUcfirst(fieldName) + "Values"
-
-                    var enumCreate = `\tenum `+type+": String, Codable {\n"
-                    enumValues.forEach(function(val) {
-                        enumCreate += `\t\tcase `+ jsLcfirst(val) + ` = "`+ val+`"\n`
-                    })
-                    enumCreate += `\t}\n`
-                    swiftEnums += enumCreate
-                } else if (type == "array") {
-                    var arrayValue = def["items"]["$ref"]
-                    if(arrayValue != undefined ){
-                        type  = `[` + arrayValue.replace('#/definitions/', '') + `]`
+                    if ( fallback ) {
+                        swiftDecoding += `\t\tlet tempValue: ` + fallback + ` = try values.decode(` + fallback + `.self, forKey: .` + fieldName + `)\n`;
+                        swiftDecoding += `\t\tif let tempValue = ` + cleanType + `(tempValue) {\n`;
+                        swiftDecoding += `\t\t\t` + fieldName + ` = tempValue\n`;
+                        swiftDecoding += `\t\t} else {\n\t\t\t throw error\n\t\t}\n`;
+                    } else if (cleanType.includes("[")) {
+                        swiftDecoding += `\t\t\t` + fieldName + ` = []\n`;
                     } else {
-	                    type  = `[` + jsUcfirst(def["items"]["type"]) + `]`
+                        swiftDecoding += `\t\tthrow error\n`
                     }
-                } else if (type == "integer") {
-                    type = "Int"
-                } else if (type == "boolean") {
-                    type = "Bool"
-                } else if (type == "object") {
-                    type = "[String: Bool]"
+
+                    swiftDecoding += `\t}\n`
                 } else {
-                    type = jsUcfirst(type)
+                    swiftDecoding += `\t` + fieldName + ` = try values.decode(` + cleanType + `.self, forKey: .` + fieldName + `)\n`
                 }
 
+                swiftModelEquatableProperties += `lhs.` + fieldName + ` == rhs.` + fieldName + ` && `;
+                swiftModelHashableProperties += `\thasher.combine(` + fieldName + `.hashValue)\n`
 
-                if (isRequired){
-                    swiftDecoding += `\t`+ fieldName +` = try values.decode(`+type +`.self, forKey: .`+fieldName+`)\n\t`
-                    swiftModelEquatableProperties += `lhs.`+ fieldName +` == rhs.`+ fieldName +` && `
-                    swiftModelHashableProperties += `\thasher.combine(`+fieldName+`.hashValue)\n`
-
-                } else {
-                    swiftDecoding += `\t`+ fieldName +` = try values.decodeIfPresent(`+type +`.self, forKey: .`+fieldName+`)\n\t`
-                }
-
-                if (isRequired == false){
-                    type += "?"
-                }
-
-
-                swiftViewModelPropertiesCoding += "\t\tcase "+fieldName+` = "`+ jsonFieldName +`"\n`
-                var description = def['description'];
-                if( description != undefined) {
-                	swiftViewModelProperties += `\t/// `+fieldName + `\n`
-                	if (isRequired) {
-                		swiftViewModelProperties += `\t/// Required\n`
-                	}
-                	swiftViewModelProperties += `\t/// ` + description + `\n`;
-                }
-                swiftViewModelProperties += `\tvar `+fieldName+`: `+type +`\n\n`;
-
+            } else {
+                swiftDecoding += `\t` + fieldName + ` = try values.decodeIfPresent(` + cleanType + `.self, forKey: .` + fieldName + `)\n`
             }
 
+            swiftViewModelPropertiesCoding += "\t\tcase " + fieldName + ` = "` + jsonFieldName + `"\n`;            // var description = def['description'];
+            // if (description != undefined) {
+            //     swiftViewModelProperties += `\t/// ` + fieldName + `\n`
+            //     if (isRequired) {
+            //         swiftViewModelProperties += `\t/// Required\n`
+            //     }
+            //     swiftViewModelProperties += `\t/// ` + description + `\n`;
+            // }
+            swiftViewModelProperties += `\tvar ` + fieldName + `: ` + type + `\n\n`;
 
-            swiftModelEquatableProperties = swiftModelEquatableProperties.substring(0, swiftModelEquatableProperties.length-3);
+        }
 
-            swiftInit += "}\n";
 
-    var model = `
+        swiftModelEquatableProperties = swiftModelEquatableProperties.substring(0, swiftModelEquatableProperties.length - 3);
+
+        swiftInit += "}\n";
+
+        var model = `
 //
-//  `+ClassName+`.swift
+//  ` + ClassName + `.swift
 //  App
 //
-//  Created by Nicholas Trienens on `+date+`.
+//  Created by Nicholas Trienens on ` + date + `.
 //  Copyright © 2019 Generated. All rights reserved.
 //
 
-struct `+ClassName+`: Codable {
+struct ` + ClassName + `: Codable {
 
-`+ swiftViewModelProperties +`
-`+ swiftEnums +`
+` + swiftViewModelProperties + `
+` + swiftEnums + `
 	enum CodingKeys: String, CodingKey {
-`+ swiftViewModelPropertiesCoding +`
+` + swiftViewModelPropertiesCoding + `
 	}
 
-`+ swiftInit +`
+` + swiftInit + `
 
-	init(from decoder: Decoder) throws {
+	required init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
-		`+swiftDecoding+`
+		` + swiftDecoding + `
 	}
-`+ swiftViewModelMethods +`
+` + swiftViewModelMethods + `
 
-	static let exampleJson: String = """
-	`+ dictionary.example +`\n"""
-	}
+}
 
 /// Implement Hashable and Equatable
 /// Using the Required properties
-extension `+ClassName+`: Hashable {
+extension ` + ClassName + `: Hashable {
     func hash(into hasher: inout Hasher) {
-`+ swiftModelHashableProperties +`
+` + swiftModelHashableProperties + `
     }
 
-    static func == (lhs: `+ClassName+`, rhs: `+ClassName+`) -> Bool {
-	 return `+swiftModelEquatableProperties+`
+    static func == (lhs: ` + ClassName + `, rhs: ` + ClassName + `) -> Bool {
+	 return ` + swiftModelEquatableProperties + `
     }
 }
 `
 
 
-    $(".responseSwiftM").text(model)
+        $(".responseSwiftM").text(model)
 
     }
 
-    String.prototype.toSnake = function(){
-	    return this.replace(/([A-Z])/g, function($1){return "_"+$1.toLowerCase(); });
+    String.prototype.toSnake = function () {
+        return this.replace(/([A-Z])/g, function ($1) {
+            return "_" + $1.toLowerCase();
+        });
     };
 
-    const localStorageName =  'pastModelSwiftSwag';
+    const localStorageName = 'pastModelSwiftSwag';
 
-   $(document).ready(function() {
+    $(document).ready(function () {
         var loaded = false
         var retrievedObject = localStorage.getItem(localStorageName);
         console.log(retrievedObject)
-        if (retrievedObject != undefined ){
+        if (retrievedObject != undefined) {
             var fullObject = JSON.parse(retrievedObject)
 
-            var data = fullObject[fullObject.length -1]
+            var data = fullObject[fullObject.length - 1]
             console.log(data)
-            if (data != undefined && true ){
+            if (data != undefined && true) {
 
                 console.log("set to last")
 
                 $(".fname").val(data["name"])
                 $(".pname").val(data["data"])
-				        $(".Decoding").val(data["advancedDecoding"])
+                $(".Decoding").val(data["advancedDecoding"])
 
                 $(".fdata").val(data["data"])
                 //$(".fdata").val(JSON.stringify(data["data"], undefined, 1))
@@ -326,14 +322,15 @@ extension `+ClassName+`: Hashable {
 
             }
         }
-/*
 
-        if (loaded) {
-            var fullObject = []
-            localStorage.setItem(localStorageName, JSON.stringify(fullObject));
+        /*
 
-        }
-*/
+                if (loaded) {
+                    var fullObject = []
+                    localStorage.setItem(localStorageName, JSON.stringify(fullObject));
+
+                }
+        */
 
 
         function gather() {
@@ -346,7 +343,7 @@ extension `+ClassName+`: Hashable {
             jsonData["advancedDecoding"] = $(".Decoding").val();
 
             var retrievedObject = localStorage.getItem(localStorageName);
-            if (retrievedObject != undefined ) {
+            if (retrievedObject != undefined) {
                 var fullObject = JSON.parse(retrievedObject)
                 var type = typeof fullObject;
                 //console.log(type)
@@ -354,7 +351,7 @@ extension `+ClassName+`: Hashable {
                 fullObject = []
             }
             fullObject.push(jsonData)
-            console.log( jsonData );
+            console.log(jsonData);
 
             // Put the object into storage
             localStorage.setItem(localStorageName, JSON.stringify(fullObject));
@@ -365,16 +362,16 @@ extension `+ClassName+`: Hashable {
             return jsonData;
         }
 
-        $(".sendForm").click(function(event) {
-             event.preventDefault();
+        $(".sendForm").click(function (event) {
+            event.preventDefault();
             var jsonData = gather()
-             $(this).button('generating...')
-             createClass(jsonData);
+            $(this).button('generating...')
+            createClass(jsonData);
 
             $(".sendForm").button('reset');
         })
 
-        $(".downloadFiles").click(function(event) {
+        $(".downloadFiles").click(function (event) {
             event.preventDefault();
             $(this).button('generating...')
 
@@ -384,15 +381,15 @@ extension `+ClassName+`: Hashable {
             var ClassName = jsonData.name
 
             var blob = new Blob([$(".responseSwiftM").text()], {type: "text/plain;charset=utf-8"});
-            saveAs(blob, ClassName+".swift");
+            saveAs(blob, ClassName + ".swift");
 
             $(".downloadFiles").button('reset');
 
         })
 
-     });
+    });
 
 
-    </script>
+</script>
 </body>
 </html>
