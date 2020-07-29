@@ -69,7 +69,7 @@ var      subtitle: string
     </form>
 
     <div class="row">
-        <br>
+        <br/>
     </div>
 
     <div class="row">
@@ -117,16 +117,16 @@ var      subtitle: string
 
     function createClass(jsonData) {
 
-        var ClassName = jsonData.name
-        var schema = jsonData.data
+        var ClassName = jsonData.name;
+        var schema = jsonData.data;
         var advancedDecoding = jsonData.advancedDecoding;
-        console.log(schema)
+        console.log(schema);
         var properties = [];
-        let lines = schema.split("\n")
+        let lines = schema.split("\n");
         console.log(lines);
         for (var index in lines) {
-            let line = lines[index]
-           let  field = line.trim()
+            let line = lines[index];
+           let  field = line.trim();
             if (field.length < 3) {
                 continue;
             }
@@ -144,20 +144,20 @@ var      subtitle: string
         }
         console.log(properties);
 
-        var swiftViewModelProperties = ""
-        var swiftModelEquatableProperties = ""
-        var swiftModelHashableProperties = ""
-        var swiftInit = "init("
+        var swiftViewModelProperties = "";
+        var swiftModelEquatableProperties = "";
+        var swiftModelHashableProperties = "";
+        var swiftInit = "init(";
 
-        var swiftViewModelMethods = ""
-        var swiftViewModelPropertiesCoding = ""
-        var swiftDecoding = ""
+        var swiftViewModelMethods = "";
+        var swiftViewModelPropertiesCoding = "";
+        var swiftDecoding = "";
 
-        var lastViewName = ""
-        var swiftEnums = ""
+        var lastViewName = "";
+        var swiftEnum = "enum Update {\n";
 
-        var myDate = new Date()
-        var date = (myDate.getMonth() + 1) + "/" + myDate.getDate() + "/" + myDate.getFullYear()
+        var myDate = new Date();
+        var date = (myDate.getMonth() + 1) + "/" + myDate.getDate() + "/" + myDate.getFullYear();
 
 
         for (var index in properties) {
@@ -193,6 +193,8 @@ var      subtitle: string
             swiftInit += "\tself." + fieldName + " = " + fieldName + "\n";
 
             var cleanType = type.replace("?", "");
+
+            swiftEnum += "case "+ fieldName+"("+type+ ")\n";
 
             if (isRequired) {
                 var fallback = null;
@@ -257,7 +259,6 @@ var      subtitle: string
 struct ` + ClassName + `: Codable {
 
 ` + swiftViewModelProperties + `
-` + swiftEnums + `
 	enum CodingKeys: String, CodingKey {
 ` + swiftViewModelPropertiesCoding + `
 	}
@@ -269,7 +270,7 @@ struct ` + ClassName + `: Codable {
 		` + swiftDecoding + `
 	}
 ` + swiftViewModelMethods + `
-
+` + swiftEnum + `
 }
 
 /// Implement Hashable and Equatable
